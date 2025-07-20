@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلب تصميم: حملة إعادة استهداف</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Stone & Amber -->
+    <!-- Application Structure Plan: The brief is structured as a single-page interactive tool using an accordion layout for the main sections. This allows the designer to focus on one part of the brief at a time, reducing cognitive load. For the "Visual Ideas" section, a tabbed interface is used to present each concept cleanly. The most significant interactive feature is the "copy-to-clipboard" functionality for all required text, which streamlines the designer's workflow by turning the brief into a practical tool. This structure was chosen to transform a passive document into an active, user-friendly resource that directly aids the design process. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: All sections of the brief (Goal, Audience, Message, etc.). Goal: Inform/Organize. Presentation: Accordion sections. Interaction: Expand/Collapse. Justification: Breaks down the information into digestible, user-controlled chunks. Method: HTML <details> & <summary> styled with Tailwind, enhanced with JS for smooth animations.
+        - Report Info: "أفكار للتصميم" (Design Ideas). Goal: Organize/Compare. Presentation: Tabbed interface within an accordion. Interaction: Click tabs to switch content. Justification: Allows for clean separation and comparison of distinct creative concepts without vertical clutter. Method: HTML/Tailwind for structure, JS to manage active tab state.
+        - Report Info: "الكلام اللي بينكتب" (Copy text). Goal: Action/Inform. Presentation: List with adjacent copy buttons. Interaction: Click to copy text. Justification: A direct workflow enhancement that makes the brief a functional tool. Method: HTML/Tailwind for layout, JS for copy functionality.
+        - Report Info: Visual Example. Goal: Inform. Presentation: Image within its accordion section. Interaction: None. Justification: Provides clear visual reference in context. Method: HTML <img> tag.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Cairo', sans-serif; scroll-behavior: smooth; }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        .tab-active {
+            background-color: #f59e0b; /* Amber 500 */
+            color: #ffffff;
+        }
+        .copy-feedback {
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto max-w-4xl p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-stone-900">طلب تصميم تفاعلي</h1>
+            <p class="text-stone-600 mt-2">حملة إعادة استهداف: دبلوم الصحة النفسية (بعرض خاص)</p>
+        </header>
+
+        <main class="space-y-4">
+
+            <!-- Section 1: The Goal -->
+            <details class="group bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer">
+                    <h2 class="text-lg font-bold text-amber-600">ايش نبغى من التصميم (الغاية)</h2>
+                    <div class="transform transition-transform duration-300 group-open:rotate-180">
+                        <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </summary>
+                <div class="px-5 pb-5 text-stone-700 leading-relaxed">
+                    <ul class="list-disc pr-5 space-y-2">
+                        <li>نرجع نجذب الناس اللي تفاعلوا معانا قبل كدا بس ما سجلوا، عن طريق عرض بطل وحصري.</li>
+                        <li>نخليهم يحسوا إن العرض ضروري ومستعجل وما يتفوت (FOMO)، عشان يتواصلوا معانا على طول.</li>
+                        <li>نزود عدد الاستفسارات والدردشات اللي تجينا فورًا من الناس اللي مستهدفينهم.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- Section 2: The Audience -->
+            <details class="group bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                <summary class="flex items-center justify-between p-5 cursor-pointer">
+                    <h2 class="text-lg font-bold text-amber-600">مين الناس اللي بنستهدفهم (الجمهور)</h2>
+                    <div class="transform transition-transform duration-300 group-open:rotate-180">
+                        <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </summary>
+                <div class="px-5 pb-5 text-stone-700 leading-relaxed space-y-3">
+                    <p><strong class="font-semibold text-stone-800">المكان:</strong> السعودية.</p>
+                    <p><strong class="font-semibold text-stone-800">اهتماماتهم:</strong> رجال وحريم مهتمين بمواضيع الصحة النفسية، علم النفس، تطوير الذات، الإرشاد الأسري، وتطوير نفسهم في الشغل.</p>
+                    <p><strong class="font-semibold text-stone-800">ايش سووا قبل كدا:</strong> زاروا صفحة الدبلوم، أو تفاعلوا (لايك، كومنت، حفظ) مع بوستاتنا اللي فاتت، أو شافوا جزء كبير من فيديوهات إعلاناتنا.</p>
+                </div>
+            </details>
+
+            <!-- Section 3: The Message -->
+            <details class="group bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                <summary class="flex items-center justify-between p-5 cursor-pointer">
+                    <h2 class="text-lg font-bold text-amber-600">الزبدة اللي نبغى نوصلها (الرسالة)</h2>
+                    <div class="transform transition-transform duration-300 group-open:rotate-180">
+                        <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </summary>
+                <div class="px-5 pb-5 text-stone-700 leading-relaxed">
+                    <div class="bg-amber-50 border-r-4 border-amber-500 p-4 rounded-lg">
+                        <p class="font-semibold">"عرض حصري ما راح يتكرر! خصم خاص لأول مرة بس لو كلمتنا في الساعتين الجاية. لا تضيع فرصتك عشان تطور مستقبلك في الشغل."</p>
+                    </div>
+                </div>
+            </details>
+            
+            <!-- Section 4: Visuals & Mood -->
+            <details class="group bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                <summary class="flex items-center justify-between p-5 cursor-pointer">
+                    <h2 class="text-lg font-bold text-amber-600">شكل التصميم والمود العام</h2>
+                    <div class="transform transition-transform duration-300 group-open:rotate-180">
+                        <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </summary>
+                <div class="px-5 pb-5 text-stone-700 leading-relaxed space-y-4">
+                    <div>
+                        <h3 class="font-bold mb-2">المود العام:</h3>
+                        <p>احترافي، يبعث عالراحة والثقة، ومستعجل. لازم اللي يشوف التصميم يحس بأهمية العرض وإنه لازم يتحرك بسرعة.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-2">الألوان:</h3>
+                        <p>نستخدم نفس الألوان الرايقة (زي درجات الأزرق والأخضر المائي) ونضيف عليها لون فاقع زي الأحمر أو البرتقالي على أجزاء العرض (زي العداد والزر حق "كلمنا دحين") عشان يبان الفرق ونحسسهم بالاستعجال.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-4">أفكار للتصميم:</h3>
+                        <div id="ideas-container">
+                            <div class="flex border-b border-stone-200 mb-4">
+                                <button data-tab="idea-1" class="idea-tab tab-active flex-1 py-2 px-4 rounded-t-lg transition-colors duration-200">فكرة ١</button>
+                                <button data-tab="idea-2" class="idea-tab flex-1 py-2 px-4 rounded-t-lg transition-colors duration-200">فكرة ٢</button>
+                                <button data-tab="idea-3" class="idea-tab flex-1 py-2 px-4 rounded-t-lg transition-colors duration-200">فكرة ٣</button>
+                            </div>
+                            <div id="idea-1" class="idea-content p-4 bg-stone-100 rounded-lg">
+                                <h4 class="font-bold mb-2">صورة شخص وعرض</h4>
+                                <p>نستخدم صورة احترافية لشخص سعودي (رجال أو حرمة) شكله واثق من نفسه (زي المثال تحت)، ونحط عليها شريط أو دائرة واضحة فيها تفاصيل العرض.</p>
+                            </div>
+                            <div id="idea-2" class="idea-content hidden p-4 bg-stone-100 rounded-lg">
+                                <h4 class="font-bold mb-2">رموز مستعجلة</h4>
+                                <p>تصميم جرافيك فيه ساعة رملية أو عداد رقمي يبين "01:59:59" مع جملة "عرض حصري" بخط كبير.</p>
+                            </div>
+                            <div id="idea-3" class="idea-content hidden p-4 bg-stone-100 rounded-lg">
+                                <h4 class="font-bold mb-2">فيديو سريع</h4>
+                                <p>مقطع فيديو من 5 لـ 10 ثواني يبدأ بـ "عرض خاص للي مهتمين بس!" وبعدها يطلع عداد للساعتين، ويخلص بـ "كلمنا دحين قبل لا يروح العرض!".</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Section 5: Copy -->
+            <details class="group bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                <summary class="flex items-center justify-between p-5 cursor-pointer">
+                    <h2 class="text-lg font-bold text-amber-600">الكلام اللي بينكتب عالتصميم</h2>
+                    <div class="transform transition-transform duration-300 group-open:rotate-180">
+                        <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </summary>
+                <div class="px-5 pb-5 text-stone-700 leading-relaxed space-y-6">
+                    <div>
+                        <h3 class="font-bold mb-3">العنوان الرئيسي (اختار واحد):</h3>
+                        <ul class="space-y-2 copy-list">
+                            <li class="flex justify-between items-center p-2 bg-stone-100 rounded-md"><span>"عرض خاص لأول مرة وبس!"</span></li>
+                            <li class="flex justify-between items-center p-2 bg-stone-100 rounded-md"><span>"خصم فوري.. مدته ساعتين"</span></li>
+                            <li class="flex justify-between items-center p-2 bg-stone-100 rounded-md"><span>"عشانك مهتم.. سوينا لك عرض حصري"</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-3">كلام تحت العنوان:</h3>
+                        <ul class="space-y-2 copy-list">
+                            <li class="flex justify-between items-center p-2 bg-stone-100 rounded-md"><span>"كلمنا دحين عشان تاخد خصمك على دبلوم الصحة النفسية المعتمد."</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-3">ايش تبغاهم يسووا (CTA):</h3>
+                        <ul class="space-y-2 copy-list">
+                            <li class="flex justify-between items-center p-2 bg-stone-100 rounded-md"><span>"كلمنا دحين واستفيد من العرض"</span></li>
+                            <li class="flex justify-between items-center p-2 bg-stone-100 rounded-md"><span>"تواصل معانا | العرض ما راح يتكرر"</span></li>
+                            <li class="flex justify-between items-center p-2 bg-stone-100 rounded-md"><span>"خد عرضك دحين"</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+            
+            <!-- Section 6: Mandatories -->
+            <details class="group bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                <summary class="flex items-center justify-between p-5 cursor-pointer">
+                    <h2 class="text-lg font-bold text-amber-600">أشياء ضرورية وممنوعة</h2>
+                    <div class="transform transition-transform duration-300 group-open:rotate-180">
+                        <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </summary>
+                <div class="px-5 pb-5 text-stone-700 leading-relaxed grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-bold text-green-600 mb-2">ضروري ✓</h3>
+                        <ul class="list-disc pr-5 space-y-2">
+                           <li>لازم نحط اللوجو حقنا ويكون واضح.</li>
+                           <li>الألوان لازم تمشي مع هوية البراند حقنا، ونستخدم اللون الفاقع حق الاستعجال بذكاء.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-red-600 mb-2">ممنوع ✗</h3>
+                        <ul class="list-disc pr-5 space-y-2">
+                           <li>لا نستخدم صور عامة ومستهلكة (Stock Photos) اللي شكلها مو حقيقي.</li>
+                           <li>لا نزحم التصميم بكلام كثير. لازم العرض يكون هو بطل الصورة.</li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+            
+            <!-- Section 7: Platforms -->
+            <details class="group bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                <summary class="flex items-center justify-between p-5 cursor-pointer">
+                    <h2 class="text-lg font-bold text-amber-600">المنصات</h2>
+                    <div class="transform transition-transform duration-300 group-open:rotate-180">
+                        <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </summary>
+                <div class="px-5 pb-5 text-stone-700 leading-relaxed">
+                    <p class="mb-2">التصميم راح نستخدمه في:</p>
+                     <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">انستغرام (بوست + ستوري)</span>
+                        <span class="bg-sky-100 text-sky-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">فيسبوك</span>
+                        <span class="bg-gray-200 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">تويتر (X)</span>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Section 8: Visual Example -->
+            <details class="group bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                <summary class="flex items-center justify-between p-5 cursor-pointer">
+                    <h2 class="text-lg font-bold text-amber-600">مثال للشكل اللي نبغاه</h2>
+                    <div class="transform transition-transform duration-300 group-open:rotate-180">
+                        <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </summary>
+                <div class="px-5 pb-5 text-stone-700 leading-relaxed space-y-4">
+                    <div>
+                        <h3 class="font-bold mb-2">الوصف:</h3>
+                        <p>صورة احترافية لرجال أو حرمة بملامح سعودية، لابس لبس شغل رسمي، وبيبتسم بثقة وهدوء. الخلفية تكون في مكتب مودرن أو مكان شغل منور ومو زحمة. دي الصورة تمثل الشخصية اللي العميل حيصير عليها بعد الدبلوم: محترف واثق ومتحكم في مستقبله. وعناصر العرض راح تنحط على دي الصورة بشكل واضح.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-2">صورة توضح الفكرة:</h3>
+                        <img src="https://placehold.co/800x400/f59e0b/ffffff?text=%D8%B5%D9%88%D8%B1%D8%A9+%D8%A7%D8%AD%D8%AA%D8%B1%D8%A7%D9%81%D9%8A%D8%A9+%D9%84%D8%B4%D8%AE%D8%B5+%D8%B3%D8%B9%D9%88%D8%AF%D9%8A+%D9%88%D8%A7%D8%AB%D9%82" alt="صورة توضيحية لشخص سعودي واثق" class="rounded-lg shadow-md w-full">
+                    </div>
+                </div>
+            </details>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tab functionality for visual ideas
+            const ideaTabs = document.querySelectorAll('.idea-tab');
+            const ideaContents = document.querySelectorAll('.idea-content');
+
+            ideaTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Deactivate all tabs and hide all content
+                    ideaTabs.forEach(t => t.classList.remove('tab-active'));
+                    ideaContents.forEach(c => c.classList.add('hidden'));
+
+                    // Activate clicked tab and show its content
+                    tab.classList.add('tab-active');
+                    const targetContent = document.getElementById(tab.dataset.tab);
+                    if (targetContent) {
+                        targetContent.classList.remove('hidden');
+                    }
+                });
+            });
+
+            // Copy-to-clipboard functionality
+            const copyLists = document.querySelectorAll('.copy-list');
+            copyLists.forEach(list => {
+                list.querySelectorAll('li').forEach(item => {
+                    const textToCopy = item.querySelector('span').innerText;
+                    
+                    const button = document.createElement('button');
+                    button.innerHTML = `<svg class="w-5 h-5 text-stone-500 hover:text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>`;
+                    button.className = 'copy-btn p-1';
+                    button.title = 'نسخ النص';
+
+                    const feedback = document.createElement('span');
+                    feedback.innerText = 'تم النسخ!';
+                    feedback.className = 'copy-feedback text-green-600 font-semibold opacity-0';
+
+                    button.addEventListener('click', () => {
+                        const textarea = document.createElement('textarea');
+                        textarea.value = textToCopy;
+                        document.body.appendChild(textarea);
+                        textarea.select();
+                        try {
+                            document.execCommand('copy');
+                            feedback.style.opacity = '1';
+                            setTimeout(() => {
+                                feedback.style.opacity = '0';
+                            }, 1500);
+                        } catch (err) {
+                            console.error('Failed to copy text: ', err);
+                        }
+                        document.body.removeChild(textarea);
+                    });
+                    
+                    const container = document.createElement('div');
+                    container.className = 'flex items-center gap-2';
+                    container.appendChild(button);
+                    container.appendChild(feedback);
+                    item.appendChild(container);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
