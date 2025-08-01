@@ -3,120 +3,445 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عرض حصري ومؤقت!</title>
-    <!-- Tailwind CSS -->
+    <title>خطة المحتوى الكاملة - IEAtd</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Cairo for Arabic -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Apply Cairo font to the body */
         body {
             font-family: 'Cairo', sans-serif;
+            background-color: #f0f2f5;
         }
-        /* Simple animation for the timer */
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
+        .slide {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 1rem 1.5rem;
+            overflow-y: auto;
+            height: 100%;
         }
-        .timer-pulse {
-            animation: pulse 1s ease-in-out infinite;
+        .slide.active {
+            display: flex;
         }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide-content {
+            width: 100%;
+            max-width: 1000px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+            color: #1f256e; /* Navy Blue */
+        }
+        .table-like {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 100%;
+            margin-top: 1rem;
+            background-color: #fff;
+            font-size: 0.8rem; /* Smaller font for tables */
+            line-height: 1.4;
+        }
+        .table-row {
+            display: flex;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .table-row:last-child {
+            border-bottom: none;
+        }
+        .table-cell {
+            padding: 0.5rem 0.75rem;
+            flex: 1;
+            text-align: right;
+        }
+        .table-cell ul {
+            padding-right: 1rem;
+        }
+        .table-header .table-cell {
+            background-color: #f7fafc;
+            font-weight: 600;
+            color: #4a5568;
+        }
+        .text-main { color: #1f256e; }
+        .text-accent { color: #660d0d; }
+        .bg-main { background-color: #1f256e; }
+        .bg-accent { background-color: #660d0d; }
     </style>
 </head>
-<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen p-4">
+<body class="flex flex-col items-center justify-center min-h-screen p-2 sm:p-4">
 
-    <!-- Landing Page Container -->
-    <div class="w-full max-w-2xl mx-auto bg-gray-800 rounded-3xl shadow-2xl overflow-hidden border-t-4 border-blue-500">
-        <div class="p-8 md:p-12 text-center">
+    <div id="presentation-container" class="w-full max-w-6xl">
+        <!-- Slide Container -->
+        <div id="slide-window" class="relative w-full aspect-[16/9] bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200">
             
-            <!-- Main Title -->
-            <h1 class="text-3xl md:text-5xl font-black text-white mb-3 leading-tight">
-                عرض حصري ينتهي قريبًا!
-            </h1>
-            
-            <!-- Subtitle -->
-            <p class="text-lg md:text-xl text-gray-300 mb-8">
-                لا تفوّت فرصتك للحصول على خصم خاص لمتابعينا على تويتر فقط.
-            </p>
-            
-            <!-- Countdown Timer -->
-            <div class="mb-8">
-                <h2 class="text-2xl font-bold text-blue-400 mb-4">الوقت المتبقي لانتهاء العرض</h2>
-                <div id="countdown-timer" class="flex justify-center items-center space-x-2 md:space-x-4 text-center timer-pulse">
-                    <div class="bg-gray-700 p-4 rounded-xl w-24">
-                        <div id="hours" class="text-4xl md:text-5xl font-bold">02</div>
-                        <div class="text-sm text-gray-400">ساعات</div>
-                    </div>
-                    <div class="text-4xl font-bold text-blue-500">:</div>
-                    <div class="bg-gray-700 p-4 rounded-xl w-24">
-                        <div id="minutes" class="text-4xl md:text-5xl font-bold">00</div>
-                        <div class="text-sm text-gray-400">دقائق</div>
-                    </div>
-                    <div class="text-4xl font-bold text-blue-500">:</div>
-                    <div class="bg-gray-700 p-4 rounded-xl w-24">
-                        <div id="seconds" class="text-4xl md:text-5xl font-bold">00</div>
-                        <div class="text-sm text-gray-400">ثواني</div>
-                    </div>
-                </div>
-            </div>
+            <!-- All 94 slides will be generated here by the script -->
 
-            <!-- Condition Section -->
-            <div class="bg-gray-900/50 border border-blue-500/30 rounded-xl p-6 mb-8">
-                <h3 class="text-xl font-bold text-white mb-2">شرط الحصول على العرض</h3>
-                <p class="text-gray-300">
-                    هذا العرض الحصري متاح فقط لمتابعينا. <span class="font-bold">تابعنا على تويتر أولاً</span> لتكون مؤهلاً.
-                </p>
-            </div>
+        </div>
 
-            <!-- Call to Action Button -->
-            <a href="https://x.com/IEATD1" class="inline-block w-full md:w-auto bg-blue-500 text-white font-bold text-lg px-10 py-4 rounded-lg shadow-lg hover:bg-blue-600 transition-all duration-300 transform hover:scale-105">
-                <div class="flex items-center justify-center">
-                    <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
-                    </svg>
-                    <span>تابعنا الآن للحصول على العرض</span>
-                </div>
-            </a>
-            
+        <!-- Navigation Controls -->
+        <div class="flex items-center justify-between w-full mt-4">
+            <button id="prev-btn" class="px-5 py-2 bg-white text-gray-800 rounded-lg shadow-md hover:bg-gray-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                السابق
+            </button>
+            <div id="slide-counter" class="text-gray-700 font-semibold text-sm sm:text-base"></div>
+            <button id="next-btn" class="px-5 py-2 text-white rounded-lg shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed bg-main hover:bg-opacity-90">
+                التالي
+            </button>
         </div>
     </div>
 
     <script>
-        // Set the date we're counting down to (2 hours from now)
-        const countdownDate = new Date().getTime() + (2 * 60 * 60 * 1000);
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- SLIDE CONTENT DATA ---
+            const slideContents = [
+                // Slide 1
+                `<div class="slide-content"><h1 class="text-4xl sm:text-5xl mb-4 text-main">Content Plan For</h1><h2 class="text-6xl sm:text-7xl font-bold text-accent">IEA td</h2><p class="mt-12 text-2xl">Presented by:</p><p class="text-xl">Marketing And Elite academy Team</p></div>`,
+                // Slide 2
+                `<div class="slide-content"><h2 class="text-6xl font-bold text-main">01</h2><h1 class="text-5xl mt-2 text-main">INTRODUCTION</h1></div>`,
+                // Slide 3
+                `<div class="slide-content"><h2 class="text-4xl mb-8 text-main">ABOUT US</h2><div class="grid md:grid-cols-2 gap-8 text-right w-full"><div class="p-4"><h3 class="text-2xl mb-2 text-main">MESSAGE</h3><p class="text-lg text-gray-700">Investing in creative minds to localize and provide training and consulting services within a global framework, by offering our advanced, integrated, high-quality services that achieve global leadership standards.</p></div><div class="p-4"><h3 class="text-2xl mb-2 text-main">VISION</h3><p class="text-lg text-gray-700">Achieving global excellence in providing training, development and consulting services.</p></div></div></div>`,
+                // Slide 4
+                `<div class="slide-content text-right"><h2 class="text-4xl mb-4 text-center text-main">OUR COMPANY</h2><p class="text-lg text-gray-700 leading-relaxed">"The Elite International Academy for Training and Development is the primary destination for anyone seeking development in their professional, academic, or even personal path.</p><p class="text-lg text-gray-700 leading-relaxed mt-4">The academy provides high-quality academic content and valuable and useful information to all trainees, meeting their needs for professional and personal development. It offers study opportunities with a select group of experts in all teaching fields, such as time management, effective leadership, educational fields, and others related to professional and personal growth.</p><p class="text-lg text-gray-700 leading-relaxed mt-4">The academy is committed to providing content using the latest technologies and the highest quality to keep pace with the demands of the global labor market."</p></div>`,
+                // Slide 5
+                `<div class="slide-content"><h2 class="text-4xl mb-4 text-main">COMPANY SLOGAN</h2><p class="text-5xl font-bold text-main">#بصمة_لتعزيز_مسارك_المهني</p></div>`,
+                // Slide 6
+                `<div class="slide-content"><h2 class="text-4xl mb-8 text-main">VISUAL IDENTITY</h2><div class="text-lg space-y-4 text-gray-700"><p><span class="font-bold text-accent">red: #660d0d</span> (Text color, Sustainability)</p><p><span class="font-bold text-main">navy blue: #1f256e</span> (Text color, Background color)</p><p><span class="font-bold">black:</span> (Text color)</p><p><span class="font-bold">white:</span> (Text color, Background color)</p></div></div>`,
+                // Slide 7
+                `<div class="slide-content"><h2 class="text-6xl font-bold text-main">02</h2><h1 class="text-5xl mt-2 text-main">Target Audience</h1></div>`,
+                // Slide 8
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">CORE CUSTOMER AUDIENCES</h2><div class="w-full h-full flex flex-col md:flex-row gap-4 items-center justify-center"><div class="w-full md:w-2/3 h-64 md:h-full"><canvas id="interestsChart"></canvas></div><div class="w-full md:w-1/3 flex flex-col gap-4"><div class="h-48"><canvas id="genderChart"></canvas></div><div><h3 class="text-xl font-bold text-main">AGE</h3><p class="text-2xl font-bold text-gray-700">24 - 57</p></div></div></div></div>`,
+                // Slide 9
+                `<div class="slide-content"><h2 class="text-3xl mb-4 text-main">Buyer Persona</h2><div class="table-like text-base"><div class="table-row table-header"><div class="table-cell">الفئة</div><div class="table-cell">الوصف</div></div><div class="table-row"><div class="table-cell font-bold">Average age</div><div class="table-cell">24-57</div></div><div class="table-row"><div class="table-cell font-bold">Interests</div><div class="table-cell">Self-development, Professional courses</div></div><div class="table-row"><div class="table-cell font-bold">Educational challenges</div><div class="table-cell">Difficulty accessing certified courses, Lack of time or budget</div></div><div class="table-row"><div class="table-cell font-bold">Platforms used</div><div class="table-cell">FB & IG, X, INKED, TIKTOK & SNAPCHAT</div></div><div class="table-row"><div class="table-cell font-bold">Activity times</div><div class="table-cell">صباحًا 12 - مساءً 6 / مساءً 6 - صباحًا 3</div></div><div class="table-row"><div class="table-cell font-bold">Preferred communication style</div><div class="table-cell">Simple visual content (videos/photos), Direct communication with the business via WhatsApp and Telegram</div></div><div class="table-row"><div class="table-cell font-bold">Goals</div><div class="table-cell">Search for accredited certificates in Saudi Arabia, Working in government agencies, Skills development and better job opportunities</div></div></div></div>`,
+                // Slide 10
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Segmentation of audience</h2><div class="w-full h-80"><canvas id="segmentationChart"></canvas></div></div>`,
+                // Slide 11
+                `<div class="slide-content text-right" style="font-size: 0.8rem; line-height: 1.5;"><h2 class="text-xl mb-2 text-center text-main">1 - تخصص نفسي الفترة الحالية</h2><p class="mb-4 text-center">الفترة الحالية وبصورة مستمرة على المدى القصير والبعيد</p><div class="grid md:grid-cols-2 gap-4 w-full"><div class="bg-gray-50 p-3 rounded-lg"><h3 class="font-bold text-main">الجمهور المستهدف:</h3><p>أخصائين الصحة النفسية، مدراء المراكز الصحية، مدربين صحة نفسية اخصائيين اجتماعيين وقطاع المعلمين وربات المنزل.</p><h3 class="font-bold mt-2 text-main">البرامج المقدمة:</h3><p>دبلوم الصحة النفسية، دبلوم علم النفس الايجابي دبلوم علم النفس الإكلينيكي، دبلوم الاضطرابات السيكوسوماتية دبلوم الاضطراب النفسي جسمية، لايف كوتش.</p><h3 class="font-bold mt-2 text-main">المنصات:</h3><p>المحتوى الممول: انستجرام، تويتر، سناب شات، تيكتوك، محركات البحث، يوتيوب. المحتوى الأورجانيك: كلوب هاوس، فيس بوك، محركات البحث، يوتيوب.</p></div><div class="bg-gray-50 p-3 rounded-lg"><h3 class="font-bold text-main">إستراتيجية المحتوى:</h3><ol class="list-decimal list-inside space-y-1"><li>جذب العملاء: محتوى يوضح تفاصيل الكورسات والقيمة المستفادة.</li><li>تحويلات مباشرة: طلب مباشر من اتخاذ إجراء بالتواصل على الموقع او الرسايل.</li><li>تحويل العملاء المحتملين لعملاء حقيقيين: عن طريق فريق المبيعات في الرد على العملاء بطريقة احترافية ومواد ابداعيه.</li><li>بدء البرنامج التدريبي: اون لاين زوم ويتم توفير للمتدربين كل الماتريال.</li><li>بعد الانتهاء من البرنامج: إرسال نسخة الكترونية ونسخة هارد كوبي.</li><li>اخذ اراء المتدربين: عن البرنامج ومدى رضاهم في شكل فيديوهات او تقييمات.</li><li>إعطاء العملاء عضوية دائمة وكود خاص بالشهادة وخصومات حصرية.</li><li>الحصول على بروتوكول تعاون لاستخراج الشهادات من جهات دولية.</li><li>في حالة تخصص الطلاب المدربين بعد التخرج: تقوم الأكاديمية بدعمهم بمميزات رقمية.</li></ol></div></div></div>`,
+                // Slide 12
+                `<div class="slide-content"><h2 class="text-2xl mb-2 text-main">Customer Personality - نفسي</h2><div class="table-like w-full"><div class="table-row table-header"><div class="table-cell" style="flex:0.5;">التخصص</div><div class="table-cell">شخصية العميل</div><div class="table-cell">الأهداف</div><div class="table-cell">المشاكل</div><div class="table-cell">الحلول</div></div><div class="table-row"><div class="table-cell" style="flex:0.5;">نفسي</div><div class="table-cell">العمر: 24+، الجنس: (نساء 70% - ذكور 30%)، المستوى التعليمي: بكالوريوس علم نفس أو خدمة اجتماعية. الوظيفة: أخصائيين نفسيين، استشاريين، أولياء أمور. الاهتمامات: دورات تدريبية، ترقيات وظيفية، شهادات مهنية.</div><div class="table-cell">تحسين مهارات تحليل السلوك، الحصول على شهادة معتمدة، اكتساب مهارات عملية، الاطلاع على أحدث الأبحاث والنظريات.</div><div class="table-cell">غياب الدورات التي توازن بين النظري والعملي، نقص الموارد باللغة العربية، التكلفة وعدم وجود خطط واضحة، ضيق الوقت.</div><div class="table-cell">التركيز في الإعلان على التطبيق العملي والدراسة بالعربية، وضع خطط دفع واضحة، التركيز على مرونة الوقت، السير في مسارات واضحة لتوثيق الشهادات.</div></div></div></div>`,
+                // Slide 13
+                `<div class="slide-content text-right" style="font-size: 0.8rem; line-height: 1.5;"><h2 class="text-xl mb-2 text-center text-main">2 - تخصص تربوي الفترة الحالية</h2><div class="grid md:grid-cols-2 gap-4 w-full"><div class="bg-gray-50 p-3 rounded-lg"><h3 class="font-bold text-main">الجمهور المستهدف:</h3><p>المعلمين والتربويين وأولياء الأمور، وكل من يتعامل مع الأطفال من منطلق التربية.</p><h3 class="font-bold mt-2 text-main">البرامج المقدمة:</h3><p>دبلوم العلاج المعرفي السلوكي، دبلوم التربية الخاصة، دبلوم تعديل السلوك، دبلوم تحليل السلوك التطبيقي، والمزيد.</p><h3 class="font-bold mt-2 text-main">المنصات:</h3><p>الممول: انستجرام، تويتر، سناب شات، تيكتوك، يوتيوب. الأورجانيك: كلوب هاوس، فيس بوك، مجموعات فيسبوك، تيليجرام.</p></div><div class="bg-gray-50 p-3 rounded-lg"><h3 class="font-bold text-main">إستراتيجية المحتوى:</h3><ol class="list-decimal list-inside space-y-1"><li>جذب العملاء: محتوى يوضح تفاصيل الكورسات والمشاكل الشائعة.</li><li>تحويلات مباشرة: طلب مباشر، ويبينار مجاني، استشارة مجانية.</li><li>تحويل العملاء المحتملين: فريق مبيعات احترافي.</li><li>بدء البرنامج: اون لاين زوم.</li><li>بعد الانتهاء: إرسال نسخة الكترونية وهارد كوبي.</li><li>اخذ الآراء: طلب تقييمات مكتوبة ومصورة.</li><li>عضوية دائمة وخصومات.</li><li>بروتوكول تعاون مع مدارس خاصة ودولية.</li><li>دعم المدربين بعد التخرج: خصومات ومميزات.</li></ol></div></div></div>`,
+                // Slide 14
+                `<div class="slide-content"><h2 class="text-2xl mb-2 text-main">Customer Personality - تربوي</h2><div class="table-like w-full"><div class="table-row table-header"><div class="table-cell" style="flex:0.5;">التخصص</div><div class="table-cell">شخصية العميل</div><div class="table-cell">الأهداف</div><div class="table-cell">المشاكل</div><div class="table-cell">الحلول</div></div><div class="table-row"><div class="table-cell" style="flex:0.5;">تربوي</div><div class="table-cell">العمر: 24+، الجنس: (نساء 70% - رجال 30%)، المستوى التعليمي: بكالوريوس علم نفس أو تربية خاصة. الوظيفة: أخصائيين تربويين، معلمين، أولياء أمور. الاهتمامات: دورات تدريبية، استراتيجيات التربية.</div><div class="table-cell">تعلم أدوات وتقنيات العلاج المعرفي السلوكي، الحصول على شهادة معتمدة دوليا، التميز في المجال المهني، تحسين المهارات.</div><div class="table-cell">عدم وجود محتوى تدريبي لدراسة الحالات، شهادة معتمدة دوليا ومعترف بها في السعودية، دعم فني وتواصل مستمر، عدم توفر حقائب تدريبية بالعربية.</div><div class="table-cell">عمل ريلز أو مقاطع توضح وجود دراسة حالات، نشر ما يثبت اعتماد الشهادات، عمل فيديوهات لآراء العملاء، إضافة نقطة توافر الحقائب التدريبية بالعربية في الإعلانات.</div></div></div></div>`,
+                // Slide 15
+                `<div class="slide-content text-right" style="font-size: 0.8rem; line-height: 1.5;"><h2 class="text-xl mb-2 text-center text-main">3 - تخصص إداري الفترة الحالية</h2><div class="grid md:grid-cols-2 gap-4 w-full"><div class="bg-gray-50 p-3 rounded-lg"><h3 class="font-bold text-main">الجمهور المستهدف:</h3><p>أصحاب المشاريع والشركات، كل مديرين الأقسام، إدارة الموارد البشرية.</p><h3 class="font-bold mt-2 text-main">البرامج المقدمة:</h3><p>دبلوم إدارة الأعمال، دبلوم إدارة الموارد البشرية، دبلوم الذكاء الاصطناعي في إدارة الموارد البشرية، دبلوم إدارة المشروعات.</p><h3 class="font-bold mt-2 text-main">المنصات:</h3><p>الممول: انستجرام، تويتر، سناب شات، تيكتوك، يوتيوب. الأورجانيك: لينكد إن، مدونة الشركة، كلوب هاوس، فيس بوك.</p></div><div class="bg-gray-50 p-3 rounded-lg"><h3 class="font-bold text-main">إستراتيجية المحتوى:</h3><ol class="list-decimal list-inside space-y-1"><li>جذب العملاء: محتوى يوضح تفاصيل الكورسات، قوالب جاهزة، ورشة عمل مجانية.</li><li>تحويلات مباشرة: طلب مباشر للتواصل.</li><li>تحويل العملاء المحتملين: فريق مبيعات احترافي.</li><li>بدء البرنامج: اون لاين زوم.</li><li>بعد الانتهاء: إرسال نسخة الكترونية وهارد كوبي.</li><li>اخذ الآراء: طلب توصيات مكتوبة على لينكدان.</li><li>عضوية دائمة وخصومات.</li><li>بروتوكول تعاون مع جهات دولية.</li><li>دعم المدربين بعد التخرج: خصومات ومميزات.</li></ol></div></div></div>`,
+                // Slide 16
+                `<div class="slide-content"><h2 class="text-2xl mb-2 text-main">Customer Personality - إداري</h2><div class="table-like w-full"><div class="table-row table-header"><div class="table-cell" style="flex:0.5;">التخصص</div><div class="table-cell">شخصية العميل</div><div class="table-cell">الأهداف</div><div class="table-cell">المشاكل</div><div class="table-cell">الحلول</div></div><div class="table-row"><div class="table-cell" style="flex:0.5;">إداري</div><div class="table-cell">العمر: 24-60، الجنس: (رجال 60% - نساء 40%)، المستوى التعليمي: بكالوريوس إدارة. الوظيفة: مديرين، تنفيذيين، أصحاب شركات. الاهتمامات: شهادات معتمدة، دورات استراتيجيات الإدارة، البحث عن التحديثات.</div><div class="table-cell">بناء فريق عمل متكامل، مواكبة رؤية 2030، بناء شبكة علاقات، تطوير المهارات الإدارية والقيادية.</div><div class="table-cell">تحديات الدراسة عن بعد، منافسة شديدة في سوق العمل، صعوبات أكاديمية وإدارية.</div><div class="table-cell">إظهار المميزات التي سيحصل عليها الخريج، نشر مقاطع للمدرب لإظهار قدرته على الشرح، وضع توصيات لما يحتاج إليه العميل.</div></div></div></div>`,
+                // Slide 17
+                `<div class="slide-content text-right" style="font-size: 0.8rem; line-height: 1.5;"><h2 class="text-xl mb-2 text-center text-main">4 - تخصص طبي (مستقبلاً)</h2><div class="grid md:grid-cols-2 gap-4 w-full"><div class="bg-gray-50 p-3 rounded-lg"><h3 class="font-bold text-main">الجمهور المستهدف:</h3><p>المدربين والأخصائيين النفسيين ومديري المستشفيات وكل ما هو متخصص بالتغذية العلاجية.</p><h3 class="font-bold mt-2 text-main">البرامج المقدمة:</h3><p>دبلوم إدارة السلامة والصحة المهنية، دبلوم التغذية العلاجية.</p><h3 class="font-bold mt-2 text-main">المنصات:</h3><p>الممول: انستجرام، تويتر، سناب شات، تيكتوك، يوتيوب. الأورجانيك: يوتيوب، لينكد إن، تيليجرام.</p></div><div class="bg-gray-50 p-3 rounded-lg"><h3 class="font-bold text-main">إستراتيجية المحتوى:</h3><ol class="list-decimal list-inside space-y-1"><li>جذب العملاء: محتوى يوضح تفاصيل الكورسات.</li><li>تحويلات مباشرة: طلب مباشر للتواصل.</li><li>تحويل العملاء المحتملين: فريق مبيعات احترافي.</li><li>بدء البرنامج: اون لاين زوم.</li><li>بعد الانتهاء: إرسال نسخة الكترونية وهارد كوبي.</li><li>اخذ الآراء: فيديوهات أو تقييمات.</li><li>عضوية دائمة وخصومات.</li><li>بروتوكول تعاون مع جهات دولية.</li><li>دعم الخريجين: خصومات على الدورات المستقبلية وخدمات رقمية.</li></ol></div></div></div>`,
+                // Slide 18
+                `<div class="slide-content"><h2 class="text-2xl mb-2 text-main">Customer Personality - طبي</h2><div class="table-like w-full"><div class="table-row table-header"><div class="table-cell" style="flex:0.5;">التخصص</div><div class="table-cell">شخصية العميل</div><div class="table-cell">الأهداف</div><div class="table-cell">المشاكل</div><div class="table-cell">الحلول</div></div><div class="table-row"><div class="table-cell" style="flex:0.5;">طبي</div><div class="table-cell">العمر: 24+، الجنس: (رجال 60% - نساء 40%)، المستوى التعليمي: بكالوريوس طب أو صيدلة أو هندسة. الوظيفة: مدربين، أخصائيين، مديري مستشفيات. الاهتمامات: إدارة الجودة، المساهمة في رؤية 2030.</div><div class="table-cell">التخصص الدقيق والتميز المهني، تولي مناصب قيادية، تحسين جودة الرعاية الصحية.</div><div class="table-cell">ضغط الدراسة وطول مدتها، صعوبة في العلوم الأساسية، الخوف من التأذي المرضي أو الأمني.</div><div class="table-cell">إظهار إمكانية دمج الدراسة، إظهار قدرة المدرب على الشرح المبسط، تصميم حقائب تدريبية تفاعلية، تقديم محتوى عبارة عن خطوات لتفادي أي ضرر.</div></div></div></div>`,
+                // Slide 19
+                `<div class="slide-content"><h1 class="text-5xl mt-2 text-main">Customer Management Strategy</h1></div>`,
+                // Slide 20
+                `<div class="slide-content text-right w-full"><h2 class="text-4xl mb-4 text-center text-main">Pre-sale</h2><div class="space-y-4 text-lg text-gray-700"><h3 class="font-bold text-main">Determine the target market</h3><ul class="list-disc list-inside"><li>We target the Gulf market, especially Saudi Arabia.</li><li>Those interested in training and professional development.</li><li>Using paid advertising on social media.</li><li>Businesses 24-57, Gender: Male and female.</li></ul><h3 class="font-bold text-main mt-4">My message to the target market</h3><p>We offer you significant value and a once-in-a-lifetime opportunity to develop or kick-start your career! We also offer innovative solutions for all your trainees.</p><h3 class="font-bold text-main mt-4">The means I will use to reach the target audience</h3><ul class="list-disc list-inside"><li>I will use content marketing to generate sales through organic content.</li><li>I will collaborate with marketers and industry experts to reach potential customers.</li></ul></div></div>`,
+                // Slide 21
+                `<div class="slide-content text-right w-full"><h2 class="text-4xl mb-4 text-center text-main">During-Sale</h2><div class="space-y-4 text-lg text-gray-700"><h3 class="font-bold text-main">The methods we will use to get interested customers</h3><ul class="list-disc list-inside"><li>A landing page attracts a customer to buy, and the page offers a free service in exchange for providing their information.</li><li>Create customized offers at targeted times and a special offer on a specific day of the month only.</li></ul><h3 class="font-bold text-main mt-4">The system we will use to get leads</h3><ul class="list-disc list-inside"><li>Sending emails to customers.</li><li>Sending specific offers to certain customers (in the form of VIP customers).</li></ul><h3 class="font-bold text-main mt-4">The strategy we will use to convert leads into joint customers</h3><ul class="list-disc list-inside"><li>Send the client price details and work with them to decide on installments if necessary.</li><li>Show the installment method and available payment methods.</li><li>Display all our diploma information and profiles to help them make a decision.</li></ul></div></div>`,
+                // Slide 22
+                `<div class="slide-content text-right w-full"><h2 class="text-4xl mb-4 text-center text-main">After-sale</h2><div class="space-y-4 text-lg text-gray-700"><h3 class="font-bold text-main">How will I provide customers with a different scientific experience?</h3><ul class="list-disc list-inside"><li>After the customer subscribes, all study materials are sent to them (less than 5 working hours later).</li><li>We follow up with the customer on a regular basis to inquire about the study and any problems they are facing.</li></ul><h3 class="font-bold text-main mt-4">What will I do to increase my customer life cycle rate?</h3><ul class="list-disc list-inside"><li>Send notifications to customers at the start of each lecture.</li><li>Provide discount coupons and additional benefits to customers when they subscribe to any other diploma.</li><li>Always send new diplomas first to subscribers based on their specialization.</li></ul><h3 class="font-bold text-main mt-4">What will I do to motivate and increase referrals?</h3><ul class="list-disc list-inside"><li>Contacting the customer to get an evaluation of their journey with us.</li><li>Providing special offers to the customer when a referral occurs through them.</li></ul></div></div>`,
+                // Slide 23
+                `<div class="slide-content"><h2 class="text-6xl font-bold text-main">03</h2><h1 class="text-5xl mt-2 text-main">Our Services Offering</h1></div>`,
+                // Slide 24
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-2 text-main">Our Product \\ Services</h2><h3 class="text-2xl mb-4 text-gray-700">Higher Diploma</h3><div class="grid md:grid-cols-2 gap-4 w-full text-right"><div class="bg-green-100 p-4 rounded-lg border border-green-300"><h4 class="font-bold text-green-800 text-xl">Strengths</h4><ul class="list-disc list-inside mt-2 text-gray-800"><li>شهادة معتمدة دوليا.</li><li>رخصة دولية لمزاولة المهنة.</li><li>مرونة في الوقت.</li><li>الحصول على المحاضرات مسجلة.</li><li>المميزات لأعضاء الأكاديمية.</li></ul></div><div class="bg-red-100 p-4 rounded-lg border border-red-300"><h4 class="font-bold text-red-800 text-xl">Weakness</h4><ul class="list-disc list-inside mt-2 text-gray-800"><li>عدم تقديم الدبلوم داخل النطاق الجغرافي للعميل (حتى لو عن بعد).</li></ul></div></div><div class="mt-4 text-right text-lg text-gray-700"><p>صممت الدبلومات لدعم المتدربين من خلال الشهادات المعتمدة في المجالات الوظيفية الخاصة بهم.</p><p>التميز في التنافس الوظيفي من خلال الاعتماد والمميزات التي تدعمهم، بالتالي زيادة فرصة الحصول على ترقية وظيفية.</p></div></div>`,
+                // Slide 25
+                `<div class="slide-content"><h2 class="text-6xl font-bold text-main">04</h2><h1 class="text-5xl mt-2 text-main">Competitors Analysis</h1></div>`,
+                // Slide 26
+                `<div class="slide-content w-full"><h2 class="text-2xl mb-2 text-main">Competitors Analysis (1/4)</h2><div class="table-like w-full"><div class="table-row table-header"><div class="table-cell" style="flex: 0.5;">Competitor</div><div class="table-cell">Strengths</div><div class="table-cell">Weaknesses</div></div><div class="table-row"><div class="table-cell font-bold" style="flex: 0.5;">IGTS</div><div class="table-cell"><ul class="list-disc"><li>منصة تعليمية رقمية متقدمة</li><li>مزود معتمد من المركز الوطني للتعليم السعودي</li><li>تخصصات ودبلومات متنوعة</li><li>خدمات استشارية تكاملية</li><li>خانة تسجيل الدخول في الموقع</li><li>أسعار معلنة مما يعطي مصداقية أكبر</li><li>لديها ثلاثة فروع في الدول المستهدفة</li><li>التركيز على مجالات محددة وذات طلب عال في السوق</li><li>خطط أسعار مرنة تشمل تخصصات معينة</li><li>خطط تقسيط متوافقة مع عملاء المملكة مثل (تابي وتمارا)</li><li>تقديم خيارات تدريب متنوعة</li><li>توفير خدمة مخصصة واضحة للشركات</li><li>لديهم خدمة محادثات مباشرة داخل الموقع</li><li>توفر دليل كامل للمتدربين</li><li>تعاون فعلي مع المؤسسات</li></ul></div><div class="table-cell"><ul class="list-disc"><li>خصومات موحدة 70% على كافة الدبلومات مما يعطي إنطباعًا سيئًا لدى العملاء.</li></ul></div></div><div class="table-row"><div class="table-cell font-bold" style="flex: 0.5;">أكاديمية التعلم</div><div class="table-cell"><ul class="list-disc"><li>لديهم مراكز أخرى تابعة لهم لتعليم اللغة والتأهيل الوظيفي</li><li>لديهم صرح تعليمي ضخم وقاعات عرض سينمائي</li><li>حازوا على جوائز كثيرة في المملكة</li><li>الاعتمادات الدولية</li><li>تصميم برامج مبتكرة ومتنوعة</li><li>اظهار الشراكات القوية</li><li>لديها 10 فروع في المملكة</li><li>صور وفيديوهات تعليمية من أرض الواقع</li><li>إبراز أعضاء مجلس الإدارة</li><li>نشاط وتفاعل قوي على السوشيال ميديا</li><li>يقدمون خدمات متميزة للطلاب مثل (microsoft 365)</li><li>لديهم رقم موحد للإستفسارات</li><li>يوجد بروفايل للأكاديمية</li></ul></div><div class="table-cell"><ul class="list-disc"><li>التسجيل برسوم إضافية غير قابلة للاسترجاع.</li><li>يتم فتح التسجيل في أوقات قليلة.</li><li>إغلاق التعليقات على الانستقرام.</li></ul></div></div></div></div>`,
+                // Slide 27
+                `<div class="slide-content w-full"><h2 class="text-2xl mb-2 text-main">Competitors Analysis (2/4)</h2><div class="table-like w-full"><div class="table-row table-header"><div class="table-cell" style="flex: 0.5;">Competitor</div><div class="table-cell">Strengths</div><div class="table-cell">Weaknesses</div></div><div class="table-row"><div class="table-cell font-bold" style="flex: 0.5;">IBS Training Academy</div><div class="table-cell"><ul class="list-disc"><li>يوجد تدريب أون لاين وفي المقر</li><li>تعاون مؤسسي كبير</li><li>الإعتمادات الدولية</li><li>نوفر خطة تدريبية كاملة للأكاديمية</li><li>طرق دفع مرنة متوافقة مع السعودية ومصر</li><li>استغلال قوي للمدونة</li><li>محركات البحث لديها قوية جدا</li><li>تنوع البرامج في مجالات الأعمال الحيوية</li><li>الاعلان عن أهم الشركات الكبيرة التي دربت موظفيها</li><li>وضع قسم للعروض والخصومات</li><li>أقسام قوية لخدمة المتدربين والعملاء</li></ul></div><div class="table-cell"><ul class="list-disc"><li>الموقع الخاص بهم قديم نوعا ما.</li><li>تفاعل حقيقي ضعيف على تويتر.</li><li>غير نشطين على يوتيوب منذ أكثر من سنة.</li><li>عدم تناسق المحتوى مع المنصات.</li></ul></div></div><div class="table-row"><div class="table-cell font-bold" style="flex: 0.5;">منصة دورات</div><div class="table-cell"><ul class="list-disc"><li>لديهم خطط أسعار محددة ومرنة للدبلومات والشركات.</li><li>وسائل دفع متوافقة مع السعودية.</li><li>برامج تدريبية معتمدة متعددة.</li><li>نشاط وتفاعل قوي على السوشيال ميديا.</li><li>تهتم بنشر فيديوهات من مقتطفات مفيدة للدكاترة.</li><li>محتوى مرئي كبير متنوع.</li><li>تطبيق موبايل على iOS.</li><li>حضور قوي في اليوتيوب.</li></ul></div><div class="table-cell"><ul class="list-disc"><li>معظم الدورات ليست متخصصة بما يكفي.</li><li>الموقع ليس منظم كفاية.</li><li>عدم توفر التطبيق الخاص بهم على أندرويد.</li><li>ليس لديهم حضور قوي على تويتر ولينكد إن وسناب شات.</li></ul></div></div></div></div>`,
+                // Slide 28
+                `<div class="slide-content w-full"><h2 class="text-2xl mb-2 text-main">Competitors Analysis (3/4)</h2><div class="table-like w-full"><div class="table-row table-header"><div class="table-cell" style="flex: 0.5;">Competitor</div><div class="table-cell">Strengths</div><div class="table-cell">Weaknesses</div></div><div class="table-row"><div class="table-cell font-bold" style="flex: 0.5;">أكاديمية التدريب النوعي</div><div class="table-cell"><ul class="list-disc"><li>موقع منسق وعصري، مع إمكانية تسجيل الدخول.</li><li>برامج تدريبية معتمدة متعددة وسهل الوصول اليها.</li><li>نشاط وتفاعل قوي على السوشيال ميديا خاصة انستقرام.</li><li>تنوع كبير في برامجهم التدريبية (حضوريا وأون لاين).</li><li>خدمات تنافسية (كتابة المحتوى وورش التدريب).</li><li>معتمدة من وزارة التعليم السعودي وغيرها.</li><li>خدمات دفع مرنة وتقسيط (مدى، تابي، تمارا).</li><li>دليل واضح وسياسات مهمة تطمئن العميل.</li></ul></div><div class="table-cell"><ul class="list-disc"><li>آخر محتوى مرئي (ريلز) على انستقرام كان من حوالي سنة.</li><li>ليس هناك أي محتوى مرئي على سناب شات.</li><li>الصور على سناب شات قليلة وغير معدة لها بشكل خاص.</li></ul></div></div><div class="table-row"><div class="table-cell font-bold" style="flex: 0.5;">الأكاديمية المتحدة للتدريب والإدارة</div><div class="table-cell"><ul class="list-disc"><li>موقع منسق وسهل وعصري.</li><li>إمكانية تسجيل الدخول في الموقع.</li><li>مكتبة متنوعة من البرامج والتخصصات.</li><li>نشاط وتفاعل قوي نسبيا على انستقرام.</li><li>طريقة عرض الدورات السهلة بالأسعار.</li><li>لديهم شهادة الـ ISO في التدريب.</li><li>تتوفر خدمة الردود على الدبلومات.</li></ul></div><div class="table-cell"><ul class="list-disc"><li>التصميمات غير متناغمة وقد تخرج عن البراند.</li><li>مشكلة في صفحة الدورات (تتحمل ببطء).</li></ul></div></div></div></div>`,
+                // Slide 29
+                `<div class="slide-content w-full"><h2 class="text-2xl mb-2 text-main">Competitors Analysis (4/4)</h2><div class="table-like w-full"><div class="table-row table-header"><div class="table-cell" style="flex: 0.5;">Competitor</div><div class="table-cell">Strengths</div><div class="table-cell">Weaknesses</div></div><div class="table-row"><div class="table-cell font-bold" style="flex: 0.5;">منصة دروب</div><div class="table-cell"><ul class="list-disc"><li>موقع منسق وعصري.</li><li>شهرة واسعة في السوق السعودي ومعدلات بحث قوية.</li><li>عدد فائق من الدورات (حوالي 16 مليون دورة).</li><li>شراكات قوية وكثيرة جدًا مع مؤسسات وطنية.</li><li>مسارات تدريبية متنوعة واحترافية.</li><li>بوابتين تسجيل (للمنشآت والأفراد).</li><li>معتمدين من الهيئة العامة للتعليم السعودي.</li><li>دليل واضح لمتدربينهم.</li><li>عدد كبير من المتابعين والتفاعل على (انستقرام وتويتر ولينكدان).</li></ul></div><div class="table-cell"><ul class="list-disc"><li>ليس لديهم مدونة في الموقع للمقالات.</li><li>بعض الفيديوهات لا تتناسب مع مقاسات إنستقرام.</li><li>غيابهم عن بعض المنصات المهمة مثل (سناب شات).</li></ul></div></div></div></div>`,
+                // Slide 30
+                `<div class="slide-content"><h1 class="text-6xl text-main">SWOT</h1></div>`,
+                // Slide 31
+                `<div class="slide-content text-right"><h2 class="text-4xl mb-4 text-center text-main">Strengths</h2><ul class="list-disc list-inside space-y-2 text-lg text-gray-700"><li>3 درجات علمية داخل كل درجة علمية 20 تخصص متنوع نفسي - تربوي - إداري - صحي).</li><li>اعتمادات من أكثر من 3 جهات رسمية دولية مصرية - سعودية - أمريكية).</li><li>ارتفاع وقوة نسبة التواجد على محركات البحث بجانب الأكاديميات الأخرى.</li><li>تطوير المحتوى التدريبي باستمرار.</li><li>دعم بعد التخرج.</li><li>هدايا تنافسية مع كل دبلوم.</li><li>خصومات حصرية للمشتركين وعضويات دائمة.</li><li>نمو كبير وملحوظ في وسائل التواصل الإجتماعي (عن طريق المحتوى المدفوع).</li><li>تنظيم مؤتمرات مع مؤسسات وأكاديميات كبرى تستقطب جمهور مستهدف.</li><li>قاعدة خريجين كبيرة مما يدل على مصداقية الأكاديمية.</li><li>أسعار تنافسية، وتوفر خدمات التقسيط بدون الحاجة لوجود حساب في (تابي وتمارا).</li></ul></div>`,
+                // Slide 32
+                `<div class="slide-content text-right"><h2 class="text-4xl mb-4 text-center text-main">Weaknesses</h2><ul class="list-disc list-inside space-y-2 text-lg text-gray-700"><li>لا يزال هناك متابعين غير حقيقيين وكذلك تعاني من تفاعل منخفض للمحتوى غير الممول.</li><li>تأخر مواعيد تسليم الشهادات.</li><li>العروض المتكررة.</li><li>هوية الأكاديمية (لوجو - سلوجان - ألوان). ** تحت المناقشة.</li><li>موقع يفتح ببطء وغير منسق.</li><li>عدم وجود منصة تعليمية داخل الموقع، وعدم توفر مدونة، وعدم الإعلان بشكل واضح على الأسعار داخل الموقع.</li><li>عدم الإعلان دائما بشكل صريح وواضح عن الإعتمادات في السوشيال ميديا.</li></ul></div>`,
+                // Slide 33
+                `<div class="slide-content text-right"><h2 class="text-4xl mb-4 text-center text-main">Opportunities</h2><ul class="list-disc list-inside space-y-2 text-lg text-gray-700"><li>تنوع التخصصات التي يحتاج إليها العملاء السعوديين وتناسب التطور المهني في مجتمعهم.</li><li>تعرف العملاء على هويتنا الرسمية (سمعة قوية في السوق الخليجي).</li><li>كثرة المواسم القوية للعروض مثل الإجازات أو المناسبات الدينية.</li><li>الدعم بعد التخرج وكافة المميزات على كل درجة علمية.</li><li>اتجاه السوق السعودي نحو التعلم عن بعد.</li><li>تطوير الموقع الخاص بالمؤسسة يؤدي بشكل كبير إلى الظهور بشكل أفضل بين المنافسين الكبار.</li><li>تغيير كبير في سياسة التسويق لدى المؤسسة (من خلال التوجه نحو الإعلانات بشكل أكثر شجاعة من ذي قبل).</li><li>رغبة الموظفين في الترقية والتطور.</li></ul></div>`,
+                // Slide 34
+                `<div class="slide-content text-right"><h2 class="text-4xl mb-4 text-center text-main">Threats</h2><ul class="list-disc list-inside space-y-2 text-lg text-gray-700"><li>التغيرات المستمرة في سياسات الاعتماد أو متطلبات التوظيف.</li><li>تطور السوق السعودي وزيادة المنافسين في نفس المجال.</li><li>التنافس في الأسعار مما قد يؤثر في قرار العميل.</li><li>تعليقات العملاء عند حدوث أي سوء فهم.</li><li>ارتفاع توقعات العملاء بسبب المنافسين.</li><li>حملات التشويه والهجوم.</li><li>توجه المنافسين إلى السوشيال ميديا أكثر من ذي قبل، والتطور بشكل سريع نحو ذلك.</li><li>استغلال اسم المؤسسة بشكل متعمد من خلال منافسين وهميين، لمحاولة الاحتيال.</li><li>عدم الاعتراف باعتمادات حلوان وجنوب الوادي في بعض الجهات الحكومية الهامة داخل المملكة.</li></ul></div>`,
+                // Slide 35
+                `<div class="slide-content"><h2 class="text-6xl font-bold text-main">05</h2><h1 class="text-5xl mt-2 text-main">Our Goals</h1></div>`,
+                // Slide 36
+                `<div class="slide-content w-full"><h2 class="text-4xl mb-8 text-main">OUR GOALS</h2><div class="flex flex-col md:flex-row justify-around w-full gap-4"><div class="flex-1 p-4 rounded-lg bg-gray-100"><h3 class="text-2xl font-bold text-main">Awareness</h3><p class="text-lg mt-2 text-gray-600">Reaching the largest number of our target audience.</p></div><div class="flex-1 p-4 rounded-lg bg-gray-100"><h3 class="text-2xl font-bold text-main">Leads</h3><p class="text-lg mt-2 text-gray-600">Success in reaching leads generated.</p></div><div class="flex-1 p-4 rounded-lg bg-gray-100"><h3 class="text-2xl font-bold text-main">Positioning</h3><p class="text-lg mt-2 text-gray-600">The company's position and its market value.</p></div></div></div>`,
+                // Slide 37
+                `<div class="slide-content w-full"><h2 class="text-4xl mb-8 text-main">Campaigns strategy</h2><div class="text-right w-full space-y-4"><div class="p-4 bg-blue-100 rounded-lg"><h3 class="text-2xl font-bold text-blue-800">Brand Awareness</h3><p>Reach, Video views, Post Engagement, Visit profile, Followers</p></div><div class="p-4 bg-green-100 rounded-lg"><h3 class="text-2xl font-bold text-green-800">Engagement</h3><p>Engagement With FB (page likes), Video views Campaign</p></div><div class="p-4 bg-red-100 rounded-lg"><h3 class="text-2xl font-bold text-red-800">Sales</h3><p>Massages Campaign, Sales, Engagement messages (for retarget)</p></div></div></div>`,
+                // Slide 38
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">SMART GOALS (followers)</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-right"><div class="p-3 bg-gray-50 rounded-lg"><strong>Specific:</strong> Gain 3K followers on Instagram, 3K on LinkedIn, 5.5K on Tiktok, 1K on Snapchat, 200 on YouTube.</div><div class="p-3 bg-gray-50 rounded-lg"><strong>Measurable:</strong> Aim 5K of followers each month.</div><div class="p-3 bg-gray-50 rounded-lg"><strong>Achievable:</strong> Based on tests, we can get followers through sponsored ads, cost of one follower does not exceed five pounds. With a budget not exceeding 50,000 pounds... we can achieve this goal.</div><div class="p-3 bg-gray-50 rounded-lg"><strong>Relevant:</strong> Increase sales through organic content. More followers, more trust.</div><div class="p-3 bg-gray-50 rounded-lg"><strong>Time-bound:</strong> 3 Months.</div></div></div>`,
+                // Slide 39
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">SMART GOALS (engagement)</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-right"><div class="p-3 bg-gray-50 rounded-lg"><strong>Specific:</strong> Gain 1.5K of Engagement on Instagram, 5.6k on Tiktok, 6.1K on YouTube, 600 on Snapchat, 100 on LinkedIn, 400 on Facebook.</div><div class="p-3 bg-gray-50 rounded-lg"><strong>Measurable:</strong> Aim 3.5K of Engagement each month.</div><div class="p-3 bg-gray-50 rounded-lg"><strong>Achievable:</strong> Based on tests, cost of one Engagement does not exceed one pound. With a budget not exceeding 15,000 pounds... we can achieve this goal.</div><div class="p-3 bg-gray-50 rounded-lg"><strong>Relevant:</strong> Engaging content, higher interaction. Higher interaction, stronger loyalty.</div><div class="p-3 bg-gray-50 rounded-lg"><strong>Time-bound:</strong> 3 Months.</div></div></div>`,
+                // Slide 40
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">SMART GOALS (reach)</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-right"><div class="p-3 bg-gray-50 rounded-lg"><strong>Specific:</strong> Gain 500K of reach on Instagram, 300k on Tiktok, 6.5K on YouTube, 3k on Snapchat, 6k on LinkedIn, 2.5k on Facebook.</div><div class="p-3 bg-gray-50 rounded-lg"><strong>Measurable:</strong> Aim 270K of reach each month.</div><div class="p-3 bg-gray-50 rounded-lg"><strong>Achievable:</strong> Based on tests, cost of one reach does not exceed one pound. With a budget not exceeding 9,000 pounds... we can achieve this goal.</div><div class="p-3 bg-gray-50 rounded-lg"><strong>Relevant:</strong> Wider reach, more visibility. More visibility, greater opportunity.</div><div class="p-3 bg-gray-50 rounded-lg"><strong>Time-bound:</strong> 3 Months.</div></div></div>`,
+                // Slide 41
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">SMART GOALS (leads)</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-right"><div class="p-3 bg-gray-50 rounded-lg"><strong>Specific:</strong> Gain 900 of leads on Instagram.</div><div class="p-3 bg-gray-50 rounded-lg"><strong>Measurable:</strong> Aim 300 of leads each month.</div><div class="p-3 bg-gray-50 rounded-lg"><strong>Achievable:</strong> Based on tests, cost of one lead does not exceed 100 pounds. With a budget not exceeding 75k pounds... we can achieve this goal.</div><div class="p-3 bg-gray-50 rounded-lg"><strong>Relevant:</strong> Valuable content, more leads. More leads, more conversions.</div><div class="p-3 bg-gray-50 rounded-lg"><strong>Time-bound:</strong> 3 Months.</div></div></div>`,
+                // Slide 42
+                `<div class="slide-content text-right"><h2 class="text-3xl mb-4 text-main">TOWS Strategy</h2><h3 class="text-2xl text-gray-700">1) SMART ATTACK STRATEGY (S x O)</h3><ul class="list-disc list-inside space-y-3 text-lg mt-4"><li>استخدام إعتماد شهاداتنا والبروتوكولات الرسمية مع الجامعات الحكومية التي تثبت مصداقيتنا.</li><li>إنشاء بروفايل تفاعلي كامل للأكاديمية يتم نشره على القنوات الخاصة والعامة الخاصة بنا.</li><li>عرض آراء عملائنا في أشكال متنوعة لتأكيد المصداقية.</li></ul></div>`,
+                // Slide 43
+                `<div class="slide-content text-right"><h2 class="text-3xl mb-4 text-main">TOWS Strategy</h2><h3 class="text-2xl text-gray-700">2) Smart Defense Strategy (S x T)</h3><div class="mt-4 space-y-4 text-lg"><div class="p-4 bg-gray-100 rounded-lg"><h4 class="font-bold">استراتيجيات مواجهة التنافس في الأسعار ورفع التوقعات:</h4><p><strong>التهديد:</strong> المنافسة السعرية قد تدفع بعض العملاء لاختيار عروض أقل سعراً، مع رفع توقعاتهم تجاه القيمة المقدمة.</p><p><strong>القوة:</strong> التطوير المستمر للمحتوى التدريبي بالتالي القدرة على تقديم إضافات دورية.</p></div><div class="p-4 bg-gray-100 rounded-lg"><h4 class="font-bold">حماية السمعة والتصدي لحملات التشويه والهجوم:</h4><p><strong>التهديد:</strong> حملات التشويه والهجوم يمكن أن تنتشر بسرعة عبر الإنترنت وتؤثر في الثقة.</p><p><strong>القوة:</strong> علامة التوثيق في جميع منصات التواصل الاجتماعي.</p></div></div></div>`,
+                // Slide 44
+                `<div class="slide-content text-right"><h2 class="text-3xl mb-4 text-main">TOWS Strategy</h2><h3 class="text-2xl text-gray-700">3) Rapid Development Strategy (W x O)</h3><ul class="list-disc list-inside space-y-3 text-lg mt-4"><li>تطوير الموقع الخاص بنا وتحويله إلى (موقع ومنصة تعليمية في نفس الوقت) متوافقة مع تجربة المستخدم السعودي.</li><li>النشر على فترات متقاربة والتركيز على المحتوى الأكثر جاذبية والتركيز على جودة المحتوى لإعادة تأهيل الألجوريزم.</li><li>استغلال الميزانية بشكل أفضل وتوزيع الميزانية حسب الأولويات.</li></ul></div>`,
+                // Slide 45
+                `<div class="slide-content text-right"><h2 class="text-3xl mb-4 text-main">TOWS Strategy</h2><h3 class="text-2xl text-gray-700">4) Preventive Resilience Strategy (W x T)</h3><ul class="list-disc list-inside space-y-3 text-lg mt-4"><li>تجهيز مكتبة كاملة من المحتوى المرئي يتسم بالقوة والتوافق مع الهوية البصرية، يستخدم للتوعية عن (صورة الشهادة الأصلية، الموقع الرسمي، طرق الدفع الموثقة).</li><li>إنشاء عروض افتراضية حصرية جاهزة يتم نشرها في أوقات حملات المنافسين (غير المتوقعة).</li><li>إنشاء سياسة الخصوصية الخاصة لدينا، لاستخدامها عند التعرض لهجوم مباشر يدعي أننا نستغل بيانات العملاء.</li></ul></div>`,
+                // Slide 46
+                `<div class="slide-content text-right w-full"><h2 class="text-3xl mb-4 text-main">Tactics</h2><h3 class="text-2xl text-gray-700">1) Target Channels:</h3><ul class="list-disc list-inside space-y-2 text-lg mt-4"><li><strong>Youtube + Google Ads:</strong> النية الشرائية.</li><li><strong>Snapchat & Tiktok:</strong> الوعي الجماهيري والترويج المباشر عبر التحويل للموقع.</li><li><strong>Instagram:</strong> الوعي والتموضع والترويج المباشر عبر التحويل للموقع أو الواتساب.</li><li><strong>Facebook:</strong> الوعي والتموضع والترويج المباشر عبر التحويل للموقع أو الواتساب.</li><li><strong>LinkedIn:</strong> الوعي والتموضع والترويج المباشر عبر التحويل للموقع أو الواتساب.</li></ul></div>`,
+                // Slide 47
+                `<div class="slide-content text-right w-full"><h2 class="text-3xl mb-4 text-main">Tactics</h2><h3 class="text-2xl text-gray-700">2) Execution Tactics:</h3><ul class="list-disc list-inside space-y-2 text-lg mt-4"><li>إطلاق الحملات الإعلانية بتواز مع التوقيت: حملات توعية - حملات بيع مباشر.</li><li>تحسين محركات البحث والظهور في جوجل (SEO).</li><li>الهوية البصرية: توحيد التصميمات بنمط معين.</li><li>الفيديوهات والريلز: أوترو موحد بالهوية.</li><li>إضافة QR Code لكل بوستر.</li></ul></div>`,
+                // Slide 48
+                `<div class="slide-content"><h2 class="text-6xl font-bold text-main">06</h2><h1 class="text-5xl mt-2 text-main">Platforms</h1></div>`,
+                // Slide 49
+                `<div class="slide-content"><h2 class="text-4xl mb-8 text-main">Content Platforms</h2><div class="grid grid-cols-3 sm:grid-cols-5 gap-4 text-lg font-semibold text-gray-700"><span>Instagram</span><span>LinkedIn</span><span>X</span><span>YouTube</span><span>TikTok</span><span>WhatsApp</span><span>Snapchat</span><span>Telegram</span><span>Facebook</span></div></div>`,
+                // Slide 50
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Content Distribution</h2><div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full text-right"><div class="p-4 bg-gray-100 rounded-lg"> <h3 class="font-bold text-xl text-main">Awareness</h3> <p>Facebook, Instagram, X, TikTok, Snapchat, YouTube</p></div><div class="p-4 bg-gray-100 rounded-lg"> <h3 class="font-bold text-xl text-main">Positioning</h3> <p>Facebook, Instagram, X, LinkedIn</p></div><div class="p-4 bg-gray-100 rounded-lg"> <h3 class="font-bold text-xl text-main">Sales</h3> <p>Facebook, Instagram, X, TikTok, Snapchat</p></div><div class="p-4 bg-gray-100 rounded-lg"> <h3 class="font-bold text-xl text-main">Post-Sales</h3> <p>Facebook, Instagram, LinkedIn</p></div></div></div>`,
+                // Slide 51
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Publishing Times</h2><div class="table-like w-full text-sm"><div class="table-row table-header"><div class="table-cell">Platform</div><div class="table-cell">Posting Times</div><div class="table-cell">Posting Days</div></div><div class="table-row"><div class="table-cell font-bold">Instagram</div><div class="table-cell">المحتوى التفاعلي والترفيهي) 6pm)</div><div class="table-cell">Every Day</div></div><div class="table-row"><div class="table-cell font-bold">Tiktok & Snapchat</div><div class="table-cell">المحتوى الترويجي) 11am - 1pm) <br> المحتوى التفاعلي والترفيهي) 6pm - 8pm)</div><div class="table-cell">Everyday</div></div><div class="table-row"><div class="table-cell font-bold">LinkedIn</div><div class="table-cell">ترويجي - تعليمي) 6am) <br> المحتوى التفاعلي والترفيهي) 6pm)</div><div class="table-cell">Monday & Wednesday</div></div><div class="table-row"><div class="table-cell font-bold">X</div><div class="table-cell">9am-12pm (الترويج) <br> 12am-6am (التفاعلي والترفيهي)</div><div class="table-cell">Every Day</div></div><div class="table-row"><div class="table-cell font-bold">Facebook</div><div class="table-cell">6pm (التفاعلي والترفيهي)</div><div class="table-cell">Every Day</div></div><div class="table-row"><div class="table-cell font-bold">YouTube</div><div class="table-cell">11am-1pm (الترويج) <br> 12am-6am (الترويج - التفاعلي والترفيهي)</div><div class="table-cell">Every Day</div></div></div></div>`,
+                // Slide 52
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Instagram</h2><div class="grid md:grid-cols-3 gap-4 text-right w-full"><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Structure</h3><ul class="list-disc list-inside"><li>محتوى الجذب: تصاميم جذابة | ريلز هوك قوي.</li><li>محتوى السلطة: بوستات Carousel تعرض تفاصيل الدبلومات.</li><li>محتوى الألفة: Reels سريعة عن الدورات.</li><li>محتوى الإجراء: ستوريز بالعروض والخصومات.</li></ul></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Format</h3><ul class="list-disc list-inside"><li>صور بجودة عالية، فيديو قصير (Reels)، ستوريز يومية.</li><li>تصميم بصري متناسق مع هوية الأكاديمية.</li></ul></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Source</h3><ul class="list-disc list-inside"><li>محتوى رسمي (BGC).</li><li>محتوى منشأ باحترافية (PGC).</li><li>محتوى المستخدمين (UGC/CGC): تجارب المتدربين.</li></ul></div></div></div>`,
+                // Slide 53
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Tiktok / Snapchat</h2><div class="grid md:grid-cols-3 gap-4 text-right w-full"><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Structure</h3><ul class="list-disc list-inside"><li>محتوى الجذب: فيديوهات تعليمية خفيفة ومسلية (30-60 ثانية).</li><li>محتوى السلطة: فيديوهات تعرض شهادات الطلاب.</li><li>محتوى الألفة: ترندات تعليمية / محتوى قصصي قصير.</li></ul></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Format</h3><ul class="list-disc list-inside"><li>فيديو سريع، فيه حركة، مرئي قوي.</li><li>أسلوب مرح يتناسب مع اللوغاريتمات.</li></ul></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Source</h3><ul class="list-disc list-inside"><li>محتوى من الأكاديمية (BGC/PGC).</li><li>محتوى عملاء (UGC): فيديوهات من الطلاب.</li><li>محتوى موظفين (EGC): تجارب شخصية.</li></ul></div></div></div>`,
+                // Slide 54
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">LinkedIn</h2><div class="grid md:grid-cols-3 gap-4 text-right w-full"><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Structure</h3><ul class="list-disc list-inside"><li>محتوى الجذب: تصاميم جذابة (كرييتيف - بروفيشنال).</li><li>محتوى السلطة: مقالات وتقارير.</li><li>محتوى الألفة: أسئلة تفاعلية متعلقة بالمقال أو المجال المهني.</li><li>محتوى الإجراء: تابعنا.</li></ul></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Format</h3><ul class="list-disc list-inside"><li>تصميم قوي ذو جودة عالية.</li><li>أسلوب بروفيشنال أو مرح بما يتناسب مع اللوغاريتمات.</li></ul></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Source</h3><ul class="list-disc list-inside"><li>محتوى رسمي (BGC).</li><li>محتوى منشأ باحترافية (PGC).</li><li>محتوى المستخدمين (UGC/CGC): تجارب المتدربين.</li></ul></div></div></div>`,
+                // Slide 55
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">X (Twitter)</h2><div class="grid md:grid-cols-3 gap-4 text-right w-full"><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Structure</h3><ul class="list-disc list-inside"><li>محتوى الجذب: تويتة + صور جذابة.</li><li>محتوى الجذب: كابشنز قوية + فيديوهات قصيرة.</li><li>محتوى الجذب: تويتة بكلمات مستهدفة.</li><li>محتوى السلطة: اقتباسات أو معلومات من الدبلوم نفسه.</li><li>محتوى الألفة: أسئلة تفاعلية.</li><li>محتوى الإجراء: تابعنا.</li></ul></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Format</h3><ul class="list-disc list-inside"><li>فيديو سريع وقوي.</li><li>تصميم جذاب وقوي.</li><li>أسلوب مرح يتناسب مع اللوغاريتمات.</li></ul></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Source</h3><ul class="list-disc list-inside"><li>محتوى أكاديمية رسمي (BGC).</li><li>محتوى موظفين (EGC): مشاركة فريق الأكاديمية.</li><li>محتوى العملاء (UGC/CGC): قصص نجاح الطلاب.</li></ul></div></div></div>`,
+                // Slide 56
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Facebook</h2><div class="grid md:grid-cols-3 gap-4 text-right w-full"><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Structure</h3><ul class="list-disc list-inside"><li>محتوى الجذب: منشورات نصية قوية + صور جذابة.</li><li>محتوى الجذب: فيديوهات قصيرة (1-3 دقائق).</li><li>محتوى السلطة: بث مباشر لشرح الدورات أو للإجابة على الأسئلة.</li></ul></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Format</h3><ul class="list-disc list-inside"><li>فيديو سريع، فيه حركة، مرئي قوي.</li><li>أسلوب مرح يتناسب مع اللوغاريتمات.</li></ul></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Source</h3><ul class="list-disc list-inside"><li>محتوى أكاديمية رسمي (BGC).</li><li>محتوى موظفين (EGC): مشاركة فريق الأكاديمية.</li><li>محتوى العملاء (UGC/CGC): قصص نجاح الطلاب.</li></ul></div></div></div>`,
+                // Slide 57
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Youtube</h2><div class="grid md:grid-cols-3 gap-4 text-right w-full"><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Structure</h3><ul class="list-disc list-inside"><li>محتوى السلطة: فيديوهات شروحات مطولة (5-10 دقائق).</li><li>محتوى الألفة: فيديوهات وراء الكواليس.</li><li>محتوى الإجراء: دعوات للاشتراك في الدورات.</li></ul></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Format</h3><ul class="list-disc list-inside"><li>فيديو سريع، فيه حركة، مرئي قوي.</li><li>أسلوب مرح يتناسب مع اللوغاريتمات.</li></ul></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Source</h3><ul class="list-disc list-inside"><li>محتوى الأكاديمية الرسمي (BGC).</li><li>محتوى منشأ باحترافية (PGC).</li></ul></div></div></div>`,
+                // Slide 58
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Whatsapp / Telegram</h2><div class="grid md:grid-cols-3 gap-4 text-right w-full"><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Structure</h3><ul class="list-disc list-inside"><li>محتوى الإجراء: رسائل مباشرة بالعروض / مواعيد التسجيل.</li><li>محتوى الألفة: رسائل تحفيزية + رسائل تهنئة للطلاب بعد التسجيل.</li><li>محتوى السلطة: روابط المقالات أو فيديوهات تشرح الدورات.</li></ul></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Format</h3><ul class="list-disc list-inside"><li>نصوص واضحة، صور للعروض / الشهادات.</li><li>روابط مباشرة للتسجيل.</li></ul></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Content Source</h3><ul class="list-disc list-inside"><li>فريق خدمة العملاء (EGC).</li><li>محتوى رسمي من الأكاديمية.</li></ul></div></div></div>`,
+                // Slide 59
+                `<div class="slide-content"><h2 class="text-6xl font-bold text-main">07</h2><h1 class="text-5xl mt-2 text-main">Sales Funnel Stages</h1></div>`,
+                // Slide 60
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Content Structure / Funnel</h2><div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full text-center"><div class="p-4 bg-gray-100 rounded-lg"><h3 class="font-bold text-xl text-main">ATTRACT CONTENT</h3><p>Awareness, Interest</p></div><div class="p-4 bg-gray-100 rounded-lg"><h3 class="font-bold text-xl text-main">AUTHORITY CONTENT</h3><p>Interest, Decision</p></div><div class="p-4 bg-gray-100 rounded-lg"><h3 class="font-bold text-xl text-main">AFFINITY CONTENT</h3><p>Decision, Action, Retention</p></div><div class="p-4 bg-gray-100 rounded-lg"><h3 class="font-bold text-xl text-main">ACTION CONTENT</h3><p>Action, Retention</p></div></div></div>`,
+                // Slide 61
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Content Types / Sources</h2><div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full text-right"><div class="p-4 bg-gray-100 rounded-lg"><h3 class="font-bold text-xl text-main">Voice Content</h3><ul class="list-disc list-inside"><li>Feedback Voice Notes (CGC)</li><li>Voice Over (BGC)</li></ul></div><div class="p-4 bg-gray-100 rounded-lg"><h3 class="font-bold text-xl text-main">Visual Content</h3><ul class="list-disc list-inside"><li>Feedback Videos (CGC/UGC)</li><li>Designs, Reels, Videos, PDFs (BGC)</li><li>Backstages Videos (EGC)</li><li>Influencers (PGC)</li></ul></div><div class="p-4 bg-gray-100 rounded-lg"><h3 class="font-bold text-xl text-main">Text Content</h3><ul class="list-disc list-inside"><li>Copy Ads (BGC)</li><li>Captions</li><li>Articles</li><li>Stories</li><li>Quotes</li><li>Website</li></ul></div><div class="p-4 bg-gray-100 rounded-lg"><h3 class="font-bold text-xl text-main">Interactive Content</h3><ul class="list-disc list-inside"><li>Forms (BGC)</li><li>Surveys</li><li>Questionnaires</li></ul></div></div></div>`,
+                // Slide 62
+                `<div class="slide-content"><h2 class="text-6xl font-bold text-main">08</h2><h1 class="text-5xl mt-2 text-main">Content Strategy</h1></div>`,
+                // Slide 63
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Content Strategy</h2><div class="text-lg space-y-4 text-gray-700 text-right"><div><h3 class="font-bold text-xl text-main">Awareness</h3><p>Product Content, Company Content</p></div><div><h3 class="font-bold text-xl text-main">Positioning</h3><p>Interactive Content, Technical Content</p></div><div><h3 class="font-bold text-xl text-main">Sales</h3><p>Offers Content, Direct Sales Content</p></div><div><h3 class="font-bold text-xl text-main">Post-Sale Nurturing</h3><p>Support, Congrats</p></div></div></div>`,
+                // Slide 64
+                `<div class="slide-content text-right"><h2 class="text-4xl mb-4 text-center text-main">Company Content</h2><ul class="list-disc list-inside space-y-3 text-lg text-gray-700"><li>محتوى ينشر الوعي حول الأكاديمية واعتماداتها، وانجازاتها في عالم التدريب والتطوير المهني.</li><li>هذا المحتوى يهدف بشكل أساسي إلى تعريف العملاء الجدد بالأكاديمية وبمدى موثوقيتها، وتحاول صناعة الخطوة الأولى لديهم في صناعة قرار الشراء، أو التفاعل الإيجابي حولها.</li></ul></div>`,
+                // Slide 65
+                `<div class="slide-content text-right"><h2 class="text-4xl mb-4 text-center text-main">Product Content</h2><ul class="list-disc list-inside space-y-3 text-lg text-gray-700"><li>نوع من محتوى التوعية بالدبلوم والشهادة، يُقدّم ملخصا بسيطا وواضحا لدبلوم معين، وكيف يُفيد في سوق العمل.</li><li>توعية حول إعتمادات الشهادة والقيمة الحقيقية لها على المستوى الوظيفي والمهني.</li></ul></div>`,
+                // Slide 66
+                `<div class="slide-content text-right"><h2 class="text-4xl mb-4 text-center text-main">Technical Content</h2><ul class="list-disc list-inside space-y-3 text-lg text-gray-700"><li>محتوى يقدم معلومات متخصصة ومتعمقة تتعلق بالمواد الأكاديمية أو المهنية التي تقدمها الأكاديمية، ويتضمن شرحًا للمفاهيم الأساسية والأدوات والنظريات والمهارات العملية.</li><li>محتوى يشرح كيفية إستخدام المنصة والحصول على الشهادة، وكيف يتحقق من الشهادة الخاصة به.</li></ul></div>`,
+                // Slide 67
+                `<div class="slide-content text-right"><h2 class="text-4xl mb-4 text-center text-main">Interactive Content</h2><ul class="list-disc list-inside space-y-3 text-lg text-gray-700"><li>نوع من المحتوى مُصمم لجذب الجمهور بفعالية من خلال التفاعل المباشر (مثل: الاختبارات القصيرة، واستطلاعات الرأي، والدراسات الاستقصائية، والألعاب التعليمية، وأدوات التقييم) يُستخدم عادة خلال مرحلة التفاعل أو تحديد الموقع لزيادة تفاعل المستخدم وتذكر العلامة التجارية.</li></ul></div>`,
+                // Slide 68
+                `<div class="slide-content text-right"><h2 class="text-4xl mb-4 text-center text-main">Direct Sales Content</h2><ul class="list-disc list-inside space-y-3 text-lg text-gray-700"><li>نوع من المحتوى الترويجي يُستخدم لعرض المنتج بشكل مباشر.</li><li>مصمم هذا المحتوى لكي يتم الطلب من العميل الشراء بشكل مباشر (أو التواصل معنا للحصول على الدبلوم).</li></ul></div>`,
+                // Slide 69
+                `<div class="slide-content text-right"><h2 class="text-4xl mb-4 text-center text-main">Offers Content</h2><ul class="list-disc list-inside space-y-3 text-lg text-gray-700"><li>نوع من المحتوى الترويجي يُستخدم لعرض خصومات لفترة محدودة أو عروض ذات قيمة مضافة على برامج التدريب، مثل تخفيضات الأسعار، أو الباقات الحصرية، أو المكافآت المجانية.</li><li>يهدف إلى تحفيز اتخاذ القرارات السريعة، ويُستخدم خلال مرحلة المبيعات كحافز مباشر.</li></ul></div>`,
+                // Slide 70
+                `<div class="slide-content text-right"><h2 class="text-4xl mb-4 text-center text-main">Congratulations Content</h2><ul class="list-disc list-inside space-y-3 text-lg text-gray-700"><li>محتوى يُشارك بعد التحاق العميل ببرنامج تدريبي أو إتمامه. يهدف هذا المحتوى إلى تعزيز العلاقة العاطفية مع العميل من خلال الاحتفاء بإنجازه، وتعزيز رضاه، وبناء ولائه على المدى الطويل. إنه جزء من تجربة ما بعد البيع.</li></ul></div>`,
+                // Slide 71
+                `<div class="slide-content text-right"><h2 class="text-4xl mb-4 text-center text-main">Support Content</h2><ul class="list-disc list-inside space-y-3 text-lg text-gray-700"><li>محتوى يُقدّم بعد شراء العميل أو إتمامه الدورة، بما في ذلك المتابعة، ودعم الأسئلة والأجوبة، والنصائح المفيدة، أو الوصول إلى موارد إضافية.</li><li>يهدف هذا إلى ضمان رضا العملاء، وحل أي مشاكل، وتعزيز الثقة والولاء للأكاديمية.</li></ul></div>`,
+                // Slide 72
+                `<div class="slide-content"><h2 class="text-4xl mb-8 text-main">Tone</h2><div class="flex justify-around items-center w-full max-w-md"><span class="p-4 bg-gray-700 text-white rounded-lg">Formal</span><span class="p-4 bg-gray-700 text-white rounded-lg">Friendly</span><span class="p-4 bg-gray-700 text-white rounded-lg">Humorous</span></div></div>`,
+                // Slide 73
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Ensure Consistency</h2><div class="table-like w-full"><div class="table-row table-header"><div class="table-cell">TONE</div><div class="table-cell">PLATFORM</div><div class="table-cell">PERCENTAGE</div></div><div class="table-row"><div class="table-cell font-bold">Formal</div><div class="table-cell">Linkedin, Youtube, Instagram, Whatsapp, Telegram, Facebook, X, Tiktok, Snapchat</div><div class="table-cell">60%</div></div><div class="table-row"><div class="table-cell font-bold">Friendly</div><div class="table-cell">Youtube, Instagram, Whatsapp, Telegram, Facebook, X, Tiktok, Snapchat</div><div class="table-cell">30%</div></div><div class="table-row"><div class="table-cell font-bold">Humorous</div><div class="table-cell">Instagram, Tiktok, Snapchat</div><div class="table-cell">10%</div></div></div></div>`,
+                // Slide 74
+                `<div class="slide-content"><h2 class="text-6xl font-bold text-main">10</h2><h1 class="text-5xl mt-2 text-main">CONTENT SHAPE</h1></div>`,
+                // Slide 75
+                `<div class="slide-content text-left"><h2 class="text-4xl mb-4 text-center text-main">Videos</h2><p class="text-lg text-gray-700">The video scale is: A Landscape & the video subject is in the middle, so we can extract from the same video a square scale, thus making the video content fit on all platforms.</p></div>`,
+                // Slide 76
+                `<div class="slide-content text-left"><h2 class="text-4xl mb-4 text-center text-main">Photos</h2><p class="text-lg text-gray-700">The image scale is 1:1 & 19:6 square so that the image fits on all platforms. Considering that on image structure: Identity, Hook, and CTA.</p></div>`,
+                // Slide 77
+                `<div class="slide-content"><h2 class="text-6xl font-bold text-main">11</h2><h1 class="text-5xl mt-2 text-main">Advertising plan</h1></div>`,
+                // Slide 78
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Advertising plan</h2><div class="table-like w-full"><div class="table-row table-header"><div class="table-cell">Channel</div><div class="table-cell">Ads Outlet</div><div class="table-cell">How?</div></div><div class="table-row"><div class="table-cell font-bold">youtube, facebook, instagram</div><div class="table-cell">Google ads, Meta ads</div><div class="table-cell text-right"><ul class="list-disc list-inside"><li>Videos that have been viewed include my company information.</li><li>Videos that have been captured of some of my products.</li><li>Use eye-catching images and videos that demonstrate the product in action.</li><li>Write compelling ad copy that highlights how our product solves common pain points.</li></ul></div></div><div class="table-row"><div class="table-cell font-bold">Tiktok</div><div class="table-cell">Tiktok ads</div><div class="table-cell text-right"><ul class="list-disc list-inside"><li>Videos that showcase the company in a casual or entertaining way.</li><li>Videos showing some of the events and behind the scenes.</li><li>Videos showing a specific diploma.</li></ul></div></div></div></div>`,
+                // Slide 79
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Content Funding</h2><div class="table-like w-full"><div class="table-row table-header"><div class="table-cell">Content Type</div><div class="table-cell">Details</div><div class="table-cell">Platform</div></div><div class="table-row"><div class="table-cell font-bold">Awareness Content</div><div class="table-cell">Product (40%), Company (60%)</div><div class="table-cell">Instagram, Facebook, Tik Tok, YouTube</div></div><div class="table-row"><div class="table-cell font-bold">Positioning Content</div><div class="table-cell">Technical (60%), Interactive (40%)</div><div class="table-cell">Instagram, YouTube, Facebook</div></div><div class="table-row"><div class="table-cell font-bold">Sales Content</div><div class="table-cell">Offers (60%), Direct Sales (40%)</div><div class="table-cell">Instagram, Tik Tok</div></div><div class="table-row"><div class="table-cell font-bold">After-sales content</div><div class="table-cell">Congratulations (100%)</div><div class="table-cell">Tik Tok, Instagram, YouTube</div></div></div></div>`,
+                // Slide 80
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Campaign Schedule</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-right"><div class="p-4 bg-gray-100 rounded-lg"><h3 class="font-bold text-xl text-main">Instagram</h3><p>Weeks 1-4 per month: Leads</p></div><div class="p-4 bg-gray-100 rounded-lg"><h3 class="font-bold text-xl text-main">Facebook</h3><p>Weeks 1-3 per month: Engagement</p></div><div class="p-4 bg-gray-100 rounded-lg"><h3 class="font-bold text-xl text-main">Tiktok</h3><p>W1-2: Leads<br>W2-3: Awareness<br>W3-4: Engagement & Leads</p></div><div class="p-4 bg-gray-100 rounded-lg"><h3 class="font-bold text-xl text-main">YouTube</h3><p>W1-2: Awareness<br>W2-3: Awareness<br>W3-4: Engagement & Leads</p></div></div></div>`,
+                // Slide 81
+                `<div class="slide-content"><h2 class="text-4xl mb-4 text-main">Budget</h2><p class="text-6xl font-bold text-gray-800">50K EGP</p><p class="text-3xl text-gray-600">per month</p></div>`,
+                // Slide 82
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Allocation</h2><div class="table-like w-full"><div class="table-row table-header"><div class="table-cell">Platform</div><div class="table-cell">Allocation "Budget"</div><div class="table-cell">Percentage</div></div><div class="table-row"><div class="table-cell font-bold">Instagram</div><div class="table-cell">34 K</div><div class="table-cell">68%</div></div><div class="table-row"><div class="table-cell font-bold">Tiktok</div><div class="table-cell">10 K</div><div class="table-cell">20%</div></div><div class="table-row"><div class="table-cell font-bold">Youtube</div><div class="table-cell">6 K</div><div class="table-cell">12%</div></div></div></div>`,
+                // Slide 83
+                `<div class="slide-content text-right w-full"><h2 class="text-4xl mb-8 text-center text-main">OPTIMIZATION</h2><div class="space-y-4"><div class="p-4 bg-gray-100 rounded-lg"><h3 class="font-bold text-xl text-main">BUDGET ALLOCATION ADJUSTMENT</h3><p class="text-lg text-gray-700">Reallocate the budget based on channel performance.</p></div><div class="p-4 bg-gray-100 rounded-lg"><h3 class="font-bold text-xl text-main">BID AND KEYWORD ADJUSTMENTS</h3><p class="text-lg text-gray-700">Optimize our copy ads regularly.</p></div><div class="p-4 bg-gray-100 rounded-lg"><h3 class="font-bold text-xl text-main">ANALYSIS AND INSIGHTS</h3><p class="text-lg text-gray-700">Extract actionable insights from your data to improve campaign performance.</p></div></div></div>`,
+                // Slide 84
+                `<div class="slide-content"><h2 class="text-6xl font-bold text-main">12</h2><h1 class="text-5xl mt-2 text-main">KPIS (July - September)</h1></div>`,
+                // Slide 85
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">KPIs (July - September)</h2><div class="w-full h-80"><canvas id="kpiChart"></canvas></div><div class="mt-4 text-center text-lg font-semibold text-main">Leads: 900</div></div>`,
+                // Slide 86
+                `<div class="slide-content"><h2 class="text-6xl font-bold text-main">13</h2><h1 class="text-5xl mt-2 text-main">Working Plan</h1></div>`,
+                // Slide 87
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Working Plan</h2><div class="flex flex-wrap justify-center gap-4 text-white"><div class="p-4 bg-main rounded-lg"><h3 class="text-xl font-bold">Planning</h3><p>عصف ذهني، بحث، إنشاء خطط قوية.</p></div><div class="p-4 bg-main rounded-lg"><h3 class="text-xl font-bold">Production</h3><p>كتابة وصناعة المحتوى وتقييمه بالمراجعة.</p></div><div class="p-4 bg-main rounded-lg"><h3 class="text-xl font-bold">Publishing</h3><p>جدولة ونشر المحتوى عبر المنصات الرسمية.</p></div><div class="p-4 bg-main rounded-lg"><h3 class="text-xl font-bold">Financing</h3><p>إطلاق الحملات متابعتها التحسين منها بقوة.</p></div><div class="p-4 bg-main rounded-lg"><h3 class="text-xl font-bold">Analysis</h3><p>تحليل النتائج، والعمل على تعديل الخطة.</p></div></div></div>`,
+                // Slide 88
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Timeline per month</h2><div class="text-right space-y-4 text-lg"><div class="p-3 bg-gray-100 rounded-lg"><h3 class="font-bold text-main">Day 10 - Day 16</h3><p>نشر ما تم تجهيزه (10 - 16)</p><p>التجهيز للمرحلة التالية (10 - 16)</p><p>(محتوى بيعي بعد البيع)</p></div><div class="p-3 bg-gray-100 rounded-lg"><h3 class="font-bold text-main">Day 16 - Day 21</h3><p>الانتهاء من المحتوى والتصميمات 10 - 14</p><p>النشر 16 - 21</p><p>بدء المرحلة التالية كمحتوى وتصميم 16 - 20</p><p>(محتوى توعية - محتوى تموضع)</p></div><div class="p-3 bg-gray-100 rounded-lg"><h3 class="font-bold text-main">Day 21 - Day 10 (of next cycle)</h3><p>نشر ماتم تجهيزه (21 - 10)</p><p>التجهيز للمرحلة التالية (21 - 10)</p><p>(محتوى بيعي، تموضع)</p></div></div></div>`,
+                // Slide 89
+                `<div class="slide-content text-right"><h2 class="text-4xl mb-4 text-center text-main">14 - Analysis and improvement</h2><ul class="list-disc list-inside space-y-3 text-lg text-gray-700"><li>اقوم بتحليل أهدافي الأساسية كل أسبوع (مضمنة في كل شهر لحين إنتهاء مدة الخطة).</li><li>ثم بعد نهاية كل أسبوع أقوم بتحسين ما يمكن تحسينه (من المحتوى وأشكاله، واستراتيجيات النشر).</li></ul></div>`,
+                // Slide 90
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Analysis 1st Month</h2><div class="table-like w-full"><div class="table-row table-header"><div class="table-cell">Weeks</div><div class="table-cell">Follower Engagement</div><div class="table-cell">Reached</div><div class="table-cell">Leads</div><div class="table-cell">What can be improved</div></div><div class="table-row"><div class="table-cell font-bold">1st Week</div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div></div><div class="table-row"><div class="table-cell font-bold">2nd Week</div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div></div><div class="table-row"><div class="table-cell font-bold">3rd Week</div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div></div><div class="table-row"><div class="table-cell font-bold">4th Week</div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div></div></div></div>`,
+                // Slide 91
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Analysis 2nd Month</h2><div class="table-like w-full"><div class="table-row table-header"><div class="table-cell">Weeks</div><div class="table-cell">Follower Engagement</div><div class="table-cell">Reached</div><div class="table-cell">Leads</div><div class="table-cell">What can be improved</div></div><div class="table-row"><div class="table-cell font-bold">1st Week</div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div></div><div class="table-row"><div class="table-cell font-bold">2nd Week</div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div></div><div class="table-row"><div class="table-cell font-bold">3rd Week</div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div></div><div class="table-row"><div class="table-cell font-bold">4th Week</div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div></div></div></div>`,
+                // Slide 92
+                `<div class="slide-content w-full"><h2 class="text-3xl mb-4 text-main">Analysis 3rd Month</h2><div class="table-like w-full"><div class="table-row table-header"><div class="table-cell">Weeks</div><div class="table-cell">Follower Engagement</div><div class="table-cell">Reached</div><div class="table-cell">Leads</div><div class="table-cell">What can be improved</div></div><div class="table-row"><div class="table-cell font-bold">1st Week</div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div></div><div class="table-row"><div class="table-cell font-bold">2nd Week</div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div></div><div class="table-row"><div class="table-cell font-bold">3rd Week</div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div></div><div class="table-row"><div class="table-cell font-bold">4th Week</div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div><div class="table-cell"></div></div></div></div>`,
+                // Slide 93
+                `<div class="slide-content text-right text-sm" style="line-height: 1.6;"><h2 class="text-3xl mb-4 text-center text-main">Summary</h2><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 w-full"><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">About Us</h3><p>أكاديمية النخبة للتدريب والتطوير هي الوجهة الأساسية لأي شخص يسعى للتطور في مساره المهني الأكاديمي، أو حتى الشخصي.</p></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Our Services</h3><ul class="list-disc list-inside"><li>شهادات معتمدة</li><li>حقائب تدريبية</li><li>دبلومات وبرامج متخصصة</li></ul></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Our Target Audience</h3><p>الأخصائيين النفسيين والمدربين والمعلمين التربويين، والمديرين وأصحاب المشاريع والشركات والمستشفيات، والأطباء.</p></div><div class="p-3 bg-gray-50 rounded-lg col-span-1 md:col-span-2 lg:col-span-3"><h3 class="font-bold text-main">Customer Management Strategy</h3><div class="table-like !text-xs !mt-1"><div class="table-row table-header"><div class="table-cell">قبل البيع</div><div class="table-cell">أثناء البيع</div><div class="table-cell">بعد البيع</div></div><div class="table-row"><div class="table-cell">حملات رسائل وصفحات هبوط</div><div class="table-cell">رد في أسرع وقت ممكن (لا يتجاوز ساعة)، عروض خاصة للعميل، إرسال بروفايل مناسب.</div><div class="table-cell">رسائل شكر، إرسال المحتوى التدريبي، إرسال الهدايا وعرض الخصومات.</div></div></div></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Strategies and Tactics</h3><ul class="list-disc list-inside"><li>تطوير الموقع الخاص بنا لتجربة عميل أفضل.</li><li>عمل حملات إعلانية قبل الأوقات المستهدفة.</li></ul></div><div class="p-3 bg-gray-50 rounded-lg"><h3 class="font-bold text-main">Recommendations</h3><ul class="list-disc list-inside"><li>تصميم بروفايلات لكل دبلوم والأكاديمية.</li><li>مراجعة الهوية البصرية للأكاديمية.</li><li>بناء نظام كامل للحصول على تقرير وتحسين.</li><li>ضرورة التحرك بشكل أسرع.</li></ul></div></div></div>`,
+                // Slide 94
+                `<div class="slide-content"><h1 class="text-6xl mb-8 text-main">THANK YOU</h1><h3 class="text-3xl">CONNECT WITH US.</h3><p class="text-2xl mt-4 text-gray-700">+201101662550</p><p class="text-2xl text-gray-700">info@ieatd.com</p></div>`,
+            ];
 
-        // Update the count down every 1 second
-        const x = setInterval(function() {
+            const totalSlides = 94;
+            const fullSlideData = [];
 
-            // Get today's date and time
-            const now = new Date().getTime();
-            
-            // Find the distance between now and the count down date
-            const distance = countdownDate - now;
-            
-            // Time calculations for hours, minutes and seconds
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            // Display the result in the elements
-            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
-            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
-            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
-            
-            // If the count down is finished, write some text 
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("countdown-timer").innerHTML = '<div class="bg-red-500 p-4 rounded-xl w-full"><div class="text-2xl font-bold">انتهى العرض!</div></div>';
+            for (let i = 0; i < totalSlides; i++) {
+                if (slideContents[i]) {
+                    fullSlideData.push(slideContents[i]);
+                } else {
+                    fullSlideData.push(`<div class="slide-content"><h2 class="text-2xl text-gray-400">الشريحة ${i + 1}</h2><p class="text-gray-400">(في انتظار المحتوى)</p></div>`);
+                }
             }
-        }, 1000);
-    </script>
+            
+            // --- SCRIPT LOGIC ---
+            const slideContainer = document.getElementById('slide-window');
+            slideContainer.innerHTML = ''; // Clear previous slides before adding new ones
+            fullSlideData.forEach((content, index) => {
+                const slideDiv = document.createElement('div');
+                slideDiv.id = `slide-${index + 1}`;
+                slideDiv.className = 'slide';
+                slideDiv.innerHTML = content;
+                slideContainer.appendChild(slideDiv);
+            });
+            
+            const allSlides = document.querySelectorAll('.slide');
+            const nextBtn = document.getElementById('next-btn');
+            const prevBtn = document.getElementById('prev-btn');
+            const slideCounter = document.getElementById('slide-counter');
+            let currentSlide = 0;
 
+            function showSlide(index) {
+                allSlides.forEach(slide => slide.classList.remove('active'));
+                if (allSlides[index]) {
+                    allSlides[index].classList.add('active');
+                }
+                slideCounter.textContent = `الشريحة ${index + 1} من ${totalSlides}`;
+                prevBtn.disabled = index === 0;
+                nextBtn.disabled = index === totalSlides - 1;
+
+                // Initialize chart on the active slide
+                if (index === 7) initInterestsChart();
+                if (index === 9) initSegmentationChart();
+                if (index === 84) initKpiChart();
+            }
+
+            nextBtn.addEventListener('click', () => {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    showSlide(currentSlide);
+                }
+            });
+
+            // --- CHART INITIALIZATION ---
+            function initInterestsChart() {
+                const ctx = document.getElementById('interestsChart')?.getContext('2d');
+                if (!ctx || ctx.canvas.chart) return;
+                ctx.canvas.chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Psychologists and trainers', 'Ceo & Business', 'Student Counselor'],
+                        datasets: [
+                            {
+                                label: 'Men',
+                                data: [40, 70, 30],
+                                backgroundColor: '#1f256e', // Navy Blue
+                            },
+                            {
+                                label: 'Women',
+                                data: [60, 30, 70],
+                                backgroundColor: '#a0aec0', // Gray
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        scales: {
+                            x: { stacked: true, ticks: { callback: value => value + '%' } },
+                            y: { stacked: true }
+                        },
+                        plugins: {
+                            tooltip: { callbacks: { label: context => `${context.dataset.label}: ${context.raw}%` } }
+                        }
+                    }
+                });
+                
+                const ctx2 = document.getElementById('genderChart')?.getContext('2d');
+                if (!ctx2 || ctx2.canvas.chart) return;
+                ctx2.canvas.chart = new Chart(ctx2, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Men', 'Women'],
+                        datasets: [{
+                            data: [60, 40],
+                            backgroundColor: ['#1f256e', '#cccccc'],
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } } }
+                });
+            }
+
+            function initSegmentationChart() {
+                const ctx = document.getElementById('segmentationChart')?.getContext('2d');
+                if (!ctx || ctx.canvas.chart) return;
+                ctx.canvas.chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['0', '25', '50', '75', '100'],
+                        datasets: [
+                            { label: 'تخصص نفسي', data: [5, 60, 40, 85, 85], borderColor: '#660d0d', tension: 0.1 },
+                            { label: 'تخصص تربوي', data: [5, 45, 50, 88, 88], borderColor: '#1f256e', tension: 0.1 },
+                            { label: 'تخصص إداري', data: [5, 50, 50, 85, 85], borderColor: '#ffc107', tension: 0.1 },
+                            { label: 'تخصص طبي', data: [5, 30, 20, 50, 50], borderColor: '#28a745', tension: 0.1 }
+                        ]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+            }
+
+            function initKpiChart() {
+                const ctx = document.getElementById('kpiChart')?.getContext('2d');
+                if (!ctx || ctx.canvas.chart) return;
+                ctx.canvas.chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['July', 'August', 'September'],
+                        datasets: [
+                            { label: 'Engagement Rate', data: [30, 45, 60], backgroundColor: '#1f256e' },
+                            { label: 'Reach', data: [40, 55, 75], backgroundColor: '#6c757d' },
+                            { label: 'Followers Growth', data: [50, 65, 85], backgroundColor: '#660d0d' }
+                        ]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+                });
+            }
+            
+            // Initial call
+            showSlide(currentSlide);
+        });
+    </script>
 </body>
 </html>
